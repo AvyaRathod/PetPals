@@ -14,6 +14,7 @@
 		4184F25D2B2362E70091747C /* PetPalsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4184F25C2B2362E70091747C /* PetPalsTests.swift */; };
 		4184F2672B2362E70091747C /* PetPalsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4184F2662B2362E70091747C /* PetPalsUITests.swift */; };
 		4184F2692B2362E70091747C /* PetPalsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4184F2682B2362E70091747C /* PetPalsUITestsLaunchTests.swift */; };
+		4184F2762B23B6080091747C /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4184F2752B23B6080091747C /* OnboardingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		4184F2622B2362E70091747C /* PetPalsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PetPalsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4184F2662B2362E70091747C /* PetPalsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetPalsUITests.swift; sourceTree = "<group>"; };
 		4184F2682B2362E70091747C /* PetPalsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetPalsUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		4184F2752B23B6080091747C /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 				4184F24D2B2362E50091747C /* ContentView.swift */,
 				4184F24F2B2362E70091747C /* Assets.xcassets */,
 				4184F2512B2362E70091747C /* Preview Content */,
+				4184F2752B23B6080091747C /* OnboardingView.swift */,
 			);
 			path = PetPals;
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4184F2762B23B6080091747C /* OnboardingView.swift in Sources */,
 				4184F24E2B2362E50091747C /* ContentView.swift in Sources */,
 				4184F24C2B2362E50091747C /* PetPalsApp.swift in Sources */,
 			);
