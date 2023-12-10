@@ -57,8 +57,7 @@ struct MainTabView: View {
 
 struct ExploreView: View {
     var body: some View {
-        Text("Explore Tab")
-            .navigationTitle("Explore")
+        HomeView()
     }
 }
 
