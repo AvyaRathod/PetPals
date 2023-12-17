@@ -32,14 +32,14 @@ struct MainTabView: View {
     var body: some View {
         TabView {
             NavigationStack {
-                ExploreView()
+                HomeView()
             }
             .tabItem {
                 Label("Explore", systemImage: "magnifyingglass")
             }
             
             NavigationStack {
-                RequestsView()
+                RequestView()
             }
             .tabItem {
                 Label("Requests", systemImage: "paperplane")
@@ -52,19 +52,6 @@ struct MainTabView: View {
                 Label("Messages", systemImage: "message")
             }
         }
-    }
-}
-
-struct ExploreView: View {
-    var body: some View {
-        HomeView()
-    }
-}
-
-struct RequestsView: View {
-    var body: some View {
-        Text("Requests Tab")
-            .navigationTitle("Requests")
     }
 }
 

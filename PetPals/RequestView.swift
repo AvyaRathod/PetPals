@@ -7,99 +7,125 @@
 
 import SwiftUI
 
+enum SearchOptions{
+    case location
+    case dates
+    case pets
+}
+
 struct RequestView: View {
-    @State private var searchLocation: String = ""
-    @State private var selectedDates = Date() // Holds the selected date
-    @State private var selectedTime = Date() // Holds the selected time
-    @State private var showingDatePicker = false
-    @State private var showingTimePicker = false
-    
-    // Date and time formatter
-    private var dateFormatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        return formatter
-    }
-    
-    private var timeFormatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.timeStyle = .short
-        return formatter
-    }
+    @State private var destination = ""
+    @State private var selectedOption: SearchOptions = .location
+    @State private var startDate = Date()
+    @State private var endDate = Date()
+    @State private var startTime = Date()
+    @State private var endTime = Date()
     
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 25, style: .continuous)
                 .fill(Color("app_yellow")) // Use the color you want for the rounded rectangle
-                .frame(height: 200) // Set the height you want for the rounded rectangle
+                .frame(height: 240) // Set the height you want for the rounded rectangle
             
-            HStack(spacing: 20) {
+            HStack(spacing: 3) {
                 // Replace these with actual images and titles for your services
                 ServiceIconView(serviceName: "Boarding", imageName: "boarding-icon")
                 ServiceIconView(serviceName: "Daycare", imageName: "daycare-icon")
                 ServiceIconView(serviceName: "Sitting", imageName: "sitting-icon")
                 ServiceIconView(serviceName: "Walking", imageName: "walking-icon")
             }
-            .padding(.top, 90.0)
+            .padding(.top, 120.0)
         }
         .edgesIgnoringSafeArea(.top)
-        .offset(y: -170)
+        .offset(y:-80)
         
         //search menu
-        VStack {
-            // Search location input
-            TextField("Search location", text: $searchLocation)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-            
-            // Choose dates button and display
-            Button(action: {
-                showingDatePicker.toggle()
-            }) {
-                HStack {
-                    Image(systemName: "calendar")
-                    Text(dateFormatter.string(from: selectedDates))
-                        .foregroundColor(.black)
-                    Spacer()
+        VStack{
+            VStack(alignment: .leading) {
+                if selectedOption == .location {
+                    Text ("Where do you want the service?")
+                        .font(.title2)
+                        .fontWeight(.semibold)
+                    HStack {
+                        Image(systemName: "magnifyingglass")
+                            .imageScale (.small)
+                        TextField("Search destinations", text: $destination)
+                            .font (.subheadline)
+                    }
+                    . frame (height: 44)
+                    . padding(.horizontal)
+                    .overlay {
+                        RoundedRectangle (cornerRadius: 8)
+                            .stroke (lineWidth: 1.0)
+                            . foregroundStyle (Color (.systemGray4))
+                    }
+                }else{
+                    CollapsedPickerView(title: "Where", description: "Add location")
                 }
-                .padding()
-            }
-            .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.gray, lineWidth: 1))
-            .sheet(isPresented: $showingDatePicker) {
-                // Date Picker
-                DatePicker("Choose dates", selection: $selectedDates, displayedComponents: .date)
-                    .datePickerStyle(GraphicalDatePickerStyle())
-                    .padding()
-            }
-            
-            // Set time button and display
-            Button(action: {
-                showingTimePicker.toggle()
-            }) {
-                HStack {
-                    Image(systemName: "clock")
-                    Text(timeFormatter.string(from: selectedTime))
-                        .foregroundColor(.black)
-                    Spacer()
-                }
-                .padding()
-            }
-            .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.gray, lineWidth: 1))
-            .sheet(isPresented: $showingTimePicker) {
-                // Time Picker
-                DatePicker("Set time", selection: $selectedTime, displayedComponents: .hourAndMinute)
-                    .datePickerStyle(WheelDatePickerStyle())
-                    .padding()
-            }
-            
-            // Select pets field (Placeholder for your implementation)
-            HStack {
-                Image(systemName: "tortoise")
-                Text("Select pets")
-                Spacer()
             }
             .padding()
-            .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.gray, lineWidth: 1))
+            .frame(height: selectedOption == .location ? 120 : 64)
+            .background (.white)
+            .clipShape (RoundedRectangle (cornerRadius: 12))
+            .padding()
+            .shadow(radius: 10)
+            .onTapGesture {
+                withAnimation(.snappy) { selectedOption = .location }
+            }
+            
+            VStack(alignment: .leading) {
+                if selectedOption == .dates {
+                    Text("When do you want the service?")
+                        .font (.title2)
+                        .fontWeight (.semibold)
+                    VStack {
+                        HStack {
+                            DatePicker ("From", selection: $startDate, displayedComponents:.date)
+                            DatePicker ("From-time", selection: $startTime, displayedComponents:.hourAndMinute).labelsHidden()
+                        }
+                        Divider()
+                        HStack{
+                            DatePicker("To", selection: $endDate, displayedComponents: .date)
+                            DatePicker ("From-time", selection: $endTime, displayedComponents:.hourAndMinute).labelsHidden()
+                        }
+                    }
+                }else{
+                    CollapsedPickerView(title: "When", description: "Add dates")
+                }
+            }
+            .padding()
+            .frame(height: selectedOption == .dates ? 160 : 64)
+            .background (.white)
+            .clipShape (RoundedRectangle (cornerRadius: 12))
+            .padding()
+            .shadow(radius: 10)
+            .onTapGesture {
+                withAnimation(.snappy) { selectedOption = .dates }
+            }
+            
+            VStack(alignment: .leading) {
+                if selectedOption == .pets {
+                    Text("What pets?")
+                        .font (.title2)
+                        .fontWeight (.semibold)
+                    VStack {
+                        ScrollView{
+                            
+                        }
+                    }
+                }else{
+                    CollapsedPickerView(title: "Pets?", description: "Add Pets")
+                }
+            }
+            .padding()
+            .frame(height: selectedOption == .pets ? 160 : 64)
+            .background (.white)
+            .clipShape (RoundedRectangle (cornerRadius: 12))
+            .padding()
+            .shadow(radius: 10)
+            .onTapGesture {
+                withAnimation(.snappy) { selectedOption = .pets }
+            }
             
             // Search button
             Button("Search") {
@@ -107,11 +133,14 @@ struct RequestView: View {
             }
             .foregroundColor(.white)
             .padding()
-            .frame(maxWidth: .infinity)
+            .frame(width: 363)
             .background(Color.brown) // Use the color that matches your design
             .cornerRadius(8)
         }
-        .padding()
+        .offset(y:-40)
+        
+        Spacer()
+        
     }
 }
 
@@ -121,14 +150,38 @@ struct ServiceIconView: View {
 
     var body: some View {
         VStack {
-            Image(systemName: imageName)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 50, height: 50)
+            // Service Image Placeholder
+            RoundedRectangle(cornerRadius: 8)
+                .frame(width: 70, height: 70)
+                .foregroundColor(.gray)
+            
             Text(serviceName)
+                .font(.subheadline)
+                .foregroundColor(.white)
+        }
+        .padding(10.0)
+        .buttonStyle(PlainButtonStyle())
+    }
+}
+
+struct CollapsedPickerView: View{
+    let title: String
+    let description: String
+    
+    var body: some View {
+        VStack {
+            HStack {
+                Text(title)
+                    .foregroundStyle(.gray)
+                Spacer ()
+                Text (description)
+            }
+                    .fontWeight(.semibold)
+                    .font (.subheadline)
         }
     }
 }
+
 
 #Preview {
     RequestView()
