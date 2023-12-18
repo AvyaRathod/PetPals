@@ -20,6 +20,7 @@
 		419369652B2CB22400E8694E /* PalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419369642B2CB22400E8694E /* PalView.swift */; };
 		419369672B2D03E300E8694E /* PetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419369662B2D03E300E8694E /* PetView.swift */; };
 		419369692B2DD77200E8694E /* RequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419369682B2DD77200E8694E /* RequestView.swift */; };
+		41F6F1522B30D2D4003069EC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F6F1512B30D2D4003069EC /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		419369642B2CB22400E8694E /* PalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PalView.swift; sourceTree = "<group>"; };
 		419369662B2D03E300E8694E /* PetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetView.swift; sourceTree = "<group>"; };
 		419369682B2DD77200E8694E /* RequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestView.swift; sourceTree = "<group>"; };
+		41F6F1512B30D2D4003069EC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,16 +108,17 @@
 		4184F24A2B2362E50091747C /* PetPals */ = {
 			isa = PBXGroup;
 			children = (
+				4184F24F2B2362E70091747C /* Assets.xcassets */,
 				4184F24B2B2362E50091747C /* PetPalsApp.swift */,
+				41F6F1512B30D2D4003069EC /* LoginView.swift */,
 				415043182B23BD8500359C47 /* HomeView.swift */,
 				419369662B2D03E300E8694E /* PetView.swift */,
 				419369682B2DD77200E8694E /* RequestView.swift */,
-				4184F24F2B2362E70091747C /* Assets.xcassets */,
-				4184F2512B2362E70091747C /* Preview Content */,
 				4184F2752B23B6080091747C /* OnboardingView.swift */,
 				419369622B2C783E00E8694E /* PalsNearbyView.swift */,
 				419369642B2CB22400E8694E /* PalView.swift */,
 				0F848A6F2B3084AC006594CF /* AddAnimalView.swift */,
+				4184F2512B2362E70091747C /* Preview Content */,
 			);
 			path = PetPals;
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 				419369692B2DD77200E8694E /* RequestView.swift in Sources */,
 				419369672B2D03E300E8694E /* PetView.swift in Sources */,
 				419369652B2CB22400E8694E /* PalView.swift in Sources */,
+				41F6F1522B30D2D4003069EC /* LoginView.swift in Sources */,
 				4184F2762B23B6080091747C /* OnboardingView.swift in Sources */,
 				0F848A702B3084AC006594CF /* AddAnimalView.swift in Sources */,
 				415043192B23BD8500359C47 /* HomeView.swift in Sources */,
