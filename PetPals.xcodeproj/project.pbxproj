@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0F848A702B3084AC006594CF /* AddAnimalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F848A6F2B3084AC006594CF /* AddAnimalView.swift */; };
 		0F8DE2432B31F490003B6EB1 /* AboutMeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8DE2422B31F490003B6EB1 /* AboutMeView.swift */; };
+		0F8DE24D2B3215C4003B6EB1 /* SelectYourPetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8DE24C2B3215C4003B6EB1 /* SelectYourPetsView.swift */; };
 		415043192B23BD8500359C47 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415043182B23BD8500359C47 /* HomeView.swift */; };
 		4184F24C2B2362E50091747C /* PetPalsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4184F24B2B2362E50091747C /* PetPalsApp.swift */; };
 		4184F2502B2362E70091747C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4184F24F2B2362E70091747C /* Assets.xcassets */; };
@@ -44,6 +45,7 @@
 /* Begin PBXFileReference section */
 		0F848A6F2B3084AC006594CF /* AddAnimalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAnimalView.swift; sourceTree = "<group>"; };
 		0F8DE2422B31F490003B6EB1 /* AboutMeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutMeView.swift; sourceTree = "<group>"; };
+		0F8DE24C2B3215C4003B6EB1 /* SelectYourPetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectYourPetsView.swift; sourceTree = "<group>"; };
 		415043182B23BD8500359C47 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		4184F2482B2362E50091747C /* PetPals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PetPals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4184F24B2B2362E50091747C /* PetPalsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetPalsApp.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				4184F24F2B2362E70091747C /* Assets.xcassets */,
 				4184F24B2B2362E50091747C /* PetPalsApp.swift */,
 				41F6F1512B30D2D4003069EC /* LoginView.swift */,
+				0F8DE24C2B3215C4003B6EB1 /* SelectYourPetsView.swift */,
 				415043182B23BD8500359C47 /* HomeView.swift */,
 				419369662B2D03E300E8694E /* PetView.swift */,
 				419369682B2DD77200E8694E /* RequestView.swift */,
@@ -290,6 +293,7 @@
 				415043192B23BD8500359C47 /* HomeView.swift in Sources */,
 				4184F24C2B2362E50091747C /* PetPalsApp.swift in Sources */,
 				0F8DE2432B31F490003B6EB1 /* AboutMeView.swift in Sources */,
+				0F8DE24D2B3215C4003B6EB1 /* SelectYourPetsView.swift in Sources */,
 				419369632B2C783E00E8694E /* PalsNearbyView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
