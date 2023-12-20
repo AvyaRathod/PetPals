@@ -15,7 +15,7 @@ struct AddAnimalView: View {
         NavigationView {
             List(filteredNames, id: \.self) { name in Text(name)}
                 .searchable(text: $searchText, prompt: "Search Animal")
-                .navigationTitle("What type of pet it is ?")
+                .navigationTitle("What type of pet is it?")
         }
     }
     var filteredNames: [String] {

@@ -46,18 +46,11 @@ struct MainTabView: View {
             }
             
             NavigationStack {
-                MessagesView()
+                MessageView()
             }
             .tabItem {
                 Label("Messages", systemImage: "message")
             }
         }
-    }
-}
-
-struct MessagesView: View {
-    var body: some View {
-        Text("Messages Tab")
-            .navigationTitle("Messages")
     }
 }
