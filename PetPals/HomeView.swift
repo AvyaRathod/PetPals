@@ -155,7 +155,8 @@ struct HomeView: View {
     }
 }
 
-struct ServiceDetailView: View {
+//delete this below struct and attach it to pals nearby fitered according to the service
+struct ServiceDetailsView: View {
     var serviceName: String
 
     var body: some View {
@@ -168,7 +169,7 @@ struct ServiceView: View {
     var serviceName: String
     
     var body: some View {
-        NavigationLink(destination: ServiceDetailView(serviceName: serviceName)) {
+        NavigationLink(destination: ServiceDetailsView(serviceName: serviceName)) {
             VStack {
                 // Service Image Placeholder
                 RoundedRectangle(cornerRadius: 8)

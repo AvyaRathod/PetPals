@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AboutMeView: View {
-    
+    var service: Service
     @State var Intro = ""
     @State var Experience = ""
     @State var Service = ""
@@ -53,5 +53,5 @@ struct AboutMeView: View {
 }
 
 #Preview {
-    AboutMeView()
+    AboutMeView(service: Service(img: "pawprint", title: "Pet Boarding", description: "Perfect if the pet needs overnight pet care"))
 }
