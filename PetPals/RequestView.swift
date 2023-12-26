@@ -127,15 +127,15 @@ struct RequestView: View {
                 withAnimation(.snappy) { selectedOption = .pets }
             }
             
-            // Search button
-            Button("Search") {
-                // Perform search action
+            NavigationLink(destination: ResultsView(destination: $destination, startDate: $startDate, endDate: $endDate, startTime: $startTime, endTime: $endTime)){
+                Text("Search")
+                    .foregroundColor(.white)
+                    .padding()
+                    .frame(width: 363)
+                    .background(Color.brown)
+                    .cornerRadius(8)
             }
-            .foregroundColor(.white)
-            .padding()
-            .frame(width: 363)
-            .background(Color.brown) // Use the color that matches your design
-            .cornerRadius(8)
+            .toolbar(.hidden)
         }
         .offset(y:-40)
         

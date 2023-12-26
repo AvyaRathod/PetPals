@@ -59,8 +59,8 @@ struct PalsNearbyView: View {
                 
                 // List of Pals
                 ScrollView {
-                    LazyVGrid(columns: columns, spacing: 0) { // Reduced spacing
-                        ForEach(pals, id: \.name) { pal in
+                    LazyVGrid(columns: columns, spacing: 0) {
+                        ForEach(pals, id: \.id) { pal in
                             PalView(palName: pal.name, palPets: pal.pets, imageName: "userimage")
                                 .padding(8)
                         }
