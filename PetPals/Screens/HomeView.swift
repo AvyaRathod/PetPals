@@ -49,7 +49,7 @@ struct HomeView: View {
                         
                         Spacer()
                         
-                        NavigationLink(destination: PalsNearbyView()) {
+                        NavigationLink(destination: PalsNearbyView(serviceName: "None")) {
                             Text("View All")
                                 .padding(.horizontal)
                                 .padding(.vertical, 5)
@@ -77,18 +77,19 @@ struct HomeView: View {
                         Spacer()
                         
                         // Rounded Button
-                        Button(action: {
-                            // Action for the button
-                        }) {
-                            Text("View All")
-                                .padding(.horizontal)
-                                .padding(.vertical, 5)
-                                .background(Color("app_yellow"))
-                                .foregroundColor(.white)
-                                .cornerRadius(15)
-                        }
+//                        Button(action: {
+//                            // Action for the button
+//                        }) {
+//                            Text("View All")
+//                                .padding(.horizontal)
+//                                .padding(.vertical, 5)
+//                                .background(Color("app_yellow"))
+//                                .foregroundColor(.white)
+//                                .cornerRadius(15)
+//                        }
                     }
-                    .padding(.horizontal)
+                    .padding(.horizontal, 17.0)
+                    .padding(.vertical, 7.0)
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
                             PetView(petName: "Tuffy", imageName: "Dogs")
@@ -122,9 +123,7 @@ struct HomeView: View {
                                 .foregroundColor(.white)
                                 .padding(.bottom, 20)
                             
-                            Button(action: {
-                                // Action for learn more button
-                            }) {
+                            NavigationLink(destination: UserProfileView()){
                                 Text("Learn more")
                                     .bold()
                                     .foregroundColor(.white)
@@ -145,8 +144,7 @@ struct HomeView: View {
             .background(gradient)
             .navigationTitle("PetPals")
             .navigationBarTitleDisplayMode(.inline)
-            .navigationBarItems(trailing: Button(action: {
-            }) {
+            .navigationBarItems(trailing: NavigationLink(destination: UserProfileView()){
                 Image(systemName: "person.crop.circle")
                     .accentColor(Color("util_grey"))
             })
@@ -169,7 +167,7 @@ struct ServiceView: View {
     var serviceName: String
     
     var body: some View {
-        NavigationLink(destination: ServiceDetailsView(serviceName: serviceName)) {
+        NavigationLink(destination: PalsNearbyView(serviceName: serviceName)) {
             VStack {
                 // Service Image Placeholder
                 RoundedRectangle(cornerRadius: 8)

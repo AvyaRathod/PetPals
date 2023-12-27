@@ -8,7 +8,8 @@
 import SwiftUI
 import MapKit
 
-struct ProfileView: View {
+struct PalProfileView: View {
+    var palName: String
     
     var body: some View {
         ScrollView{
@@ -22,7 +23,7 @@ struct ProfileView: View {
                         .frame(width: 54, height: 54)
                         .clipShape(Circle())
                     
-                    Text("Lucy's Crib")
+                    Text(palName)
                         .fontWeight(.semibold)
                         .font(.title2)
                         .padding()
@@ -97,5 +98,5 @@ struct ProfileView: View {
 }
 
 #Preview {
-    ProfileView()
+    PalProfileView(palName: "palName")
 }

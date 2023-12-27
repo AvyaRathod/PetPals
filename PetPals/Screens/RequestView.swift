@@ -105,20 +105,18 @@ struct RequestView: View {
             
             VStack(alignment: .leading) {
                 if selectedOption == .pets {
-                    Text("What pets?")
+                    Text("Which pet?")
                         .font (.title2)
                         .fontWeight (.semibold)
-                    VStack {
-                        ScrollView{
-                            
-                        }
-                    }
+                    
+                    SelectYourPetsView()
+                    
                 }else{
                     CollapsedPickerView(title: "Pets?", description: "Add Pets")
                 }
             }
             .padding()
-            .frame(height: selectedOption == .pets ? 160 : 64)
+            .frame(height: selectedOption == .pets ? 270 : 64)
             .background (.white)
             .clipShape (RoundedRectangle (cornerRadius: 12))
             .padding()
@@ -137,7 +135,7 @@ struct RequestView: View {
             }
             .toolbar(.hidden)
         }
-        .offset(y:-40)
+        .offset(y:-60)
         
         Spacer()
         
@@ -181,6 +179,7 @@ struct CollapsedPickerView: View{
         }
     }
 }
+
 
 
 #Preview {

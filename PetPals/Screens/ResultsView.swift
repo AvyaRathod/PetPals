@@ -14,6 +14,8 @@ struct ResultsView: View {
     @Binding var startTime: Date
     @Binding var endTime: Date
         
+    @Environment(\.dismiss) private var dismiss
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -21,7 +23,7 @@ struct ResultsView: View {
                     location: destination,
                     dateRange: dateRangeString(from: startDate, to: endDate),
                     backAction: {
-                        // Define what the back button should do
+                        dismiss()
                     },
                     sortAction: {
                         // Define what the sort button should do

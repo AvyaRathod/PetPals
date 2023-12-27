@@ -59,15 +59,6 @@ struct PalView: View {
     }
 }
 
-struct PalProfileView: View {
-    var palName: String
-
-    var body: some View {
-        Text("Profile of \(palName)")
-            .navigationTitle(palName)
-    }
-}
-
 // Preview
 #Preview {
     PalView(palName: "Lorem ipsun", palPets: "Dog, cat", imageName: "user image")

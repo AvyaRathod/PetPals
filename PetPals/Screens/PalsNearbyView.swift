@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PalsNearbyView: View {
+    var serviceName: String
     
     let pals: [Pal] = [
         Pal(name: "Jack Bird", pets: "Dogs, Cats"),
@@ -83,7 +84,7 @@ struct Pal: Identifiable {
 #if DEBUG
 struct PalsNearbyView_Previews: PreviewProvider {
     static var previews: some View {
-        PalsNearbyView()
+        PalsNearbyView(serviceName: "None")
     }
 }
 #endif
