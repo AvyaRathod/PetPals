@@ -111,6 +111,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		411F49792B3CD0830009B03F /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 		4184F23F2B2362E50091747C = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +141,7 @@
 		4184F24A2B2362E50091747C /* PetPals */ = {
 			isa = PBXGroup;
 			children = (
+				411F49792B3CD0830009B03F /* Preview Content */,
 				4184F24F2B2362E70091747C /* Assets.xcassets */,
 				4184F24B2B2362E50091747C /* PetPalsApp.swift */,
 				4195C8902B3CCCCB00FC08EC /* Components */,
