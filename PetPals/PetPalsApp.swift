@@ -11,6 +11,8 @@ import SwiftUI
 struct PetPalsApp: App {
     // For development purposes, ignore the stored value and reset onboarding each launch
     @AppStorage("isOnboardingCompleted") var isOnboardingCompleted: Bool = false
+    
+    @Environment(\.dismiss) private var dismiss
 
     init() {
         UserDefaults.standard.removeObject(forKey: "isOnboardingCompleted")

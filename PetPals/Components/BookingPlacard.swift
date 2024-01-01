@@ -22,74 +22,76 @@ struct BookingPlacard: View {
     @State private var isFavorite: Bool = false
     
     var body: some View {
-        ZStack(alignment: .topTrailing) {
-            RoundedRectangle(cornerRadius: 20)
-                .fill(Color(#colorLiteral(red: 0.96, green: 0.91, blue: 0.87, alpha: 1)))
-                .frame(width: 346, height: 167)
-                .overlay(
-                    VStack {
-                        HStack {
-                            Image(results.img)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 112, height: 144)
-                                .clipped()
-                                .cornerRadius(10)
-                                .offset(x:-8)
-                            VStack {
-                                VStack(alignment: .leading) {
-                                    Text(results.name)
-                                        .font(.title2)
-                                        .fontWeight(.bold)
-                                    
-                                    HStack {
-                                        ForEach(0..<results.stars, id: \.self) { _ in
-                                            Image(systemName: "star.fill")
-                                                .foregroundColor(.yellow)
-                                                .frame(width: 12.0)
+        NavigationLink(destination: PalProfileView(palName: results.name)) {
+            ZStack(alignment: .topTrailing) {
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(Color(#colorLiteral(red: 0.96, green: 0.91, blue: 0.87, alpha: 1)))
+                    .frame(width: 346, height: 167)
+                    .overlay(
+                        VStack {
+                            HStack {
+                                Image(results.img)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 112, height: 144)
+                                    .clipped()
+                                    .cornerRadius(10)
+                                    .offset(x:-8)
+                                VStack {
+                                    VStack(alignment: .leading) {
+                                        Text(results.name)
+                                            .font(.title2)
+                                            .fontWeight(.bold)
+                                        
+                                        HStack {
+                                            ForEach(0..<results.stars, id: \.self) { _ in
+                                                Image(systemName: "star.fill")
+                                                    .foregroundColor(.yellow)
+                                                    .frame(width: 12.0)
                                                 
+                                            }
+                                        }
+                                        Text(results.address)
+                                            .font(.caption)
+                                            .foregroundColor(.gray)
+                                            .lineLimit(2)
+                                    }
+                                    VStack(alignment: .trailing) {
+                                        Text("From INR \(results.cost)/night")
+                                            .font(.caption)
+                                            .foregroundColor(.gray)
+                                        
+                                        //add conditional routing here: if already logged in, lead to a confirmation page-> payment options-> booking successful/failed page
+                                        NavigationLink(destination:LoginView()){
+                                            Text("Book")
+                                                .foregroundColor(.white)
+                                                .padding()
+                                                .frame(width: 179.0, height: 23.0)
+                                                .background(Color.brown)
+                                                .cornerRadius(10)
                                         }
                                     }
-                                    Text(results.address)
-                                        .font(.caption)
-                                        .foregroundColor(.gray)
-                                        .lineLimit(2)
+                                    .offset(x:13,y:10)
+                                    
                                 }
-                                VStack(alignment: .trailing) {
-                                    Text("From INR \(results.cost)/night")
-                                        .font(.caption)
-                                        .foregroundColor(.gray)
-                                    Button(action: {
-                                        // Action for booking
-                                    }) {
-                                        Text("Book")
-                                            .foregroundColor(.white)
-                                            .padding()
-                                            .frame(width: 179.0, height: 23.0)
-                                            .background(Color.brown)
-                                            .cornerRadius(10)
-                                    }
-                                }
-                                .offset(x:13,y:10)
-                                
                             }
                         }
-                    }
-                )
-            
-            // Favorite button
-            Button(action: {
-                isFavorite.toggle()
-            }) {
-                Image(systemName: isFavorite ? "heart.fill" : "heart")
-                    .foregroundColor(isFavorite ? .red : .gray)
-                    .padding(10)
-                    .clipShape(Circle())
-                    .shadow(radius: 5)
+                    )
+                
+                // Favorite button
+                Button(action: {
+                    isFavorite.toggle()
+                }) {
+                    Image(systemName: isFavorite ? "heart.fill" : "heart")
+                        .foregroundColor(isFavorite ? .red : .gray)
+                        .padding(10)
+                        .clipShape(Circle())
+                        .shadow(radius: 5)
+                }
+                .offset(x: -1, y: 4)
             }
-            .offset(x: -1, y: 4)
+            .padding(.horizontal)
         }
-        .padding(.horizontal)
     }
 }
 

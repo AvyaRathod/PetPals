@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct UserProfileView: View {
+        
     var body: some View {
         ScrollView{
             ZStack(){
@@ -24,7 +25,7 @@ struct UserProfileView: View {
                             
                             HStack(spacing: 2){
                                 Text("+91 9876543210")
-                                Text("-")
+                                Divider()
                                 Text("test123@gmail.com")
                                 
                                 Spacer()
@@ -46,36 +47,14 @@ struct UserProfileView: View {
             .offset(y:-80)
             VStack{
                 RegistrationBoxView()
-                HStack{
+                VStack{
                     Text("My Pets")
                         .fontWeight(.semibold)
                         .font(.title2)
                         .padding(.top)
-                    Spacer()
+                    SelectYourPetsView()
                 }
                 .padding(.horizontal)
-                HStack {
-                    PetView(petName: "Tuffy", imageName: "Dogs")
-                        .padding(.horizontal, 4)
-                        .background(.gray)
-                        .cornerRadius(8)
-                    PetView(petName: "Jerry", imageName: "Dogs")
-                        .padding(.horizontal, 4)
-                        .background(.gray)
-                        .cornerRadius(8)
-                }
-                .padding(.vertical,4)
-                
-                HStack {
-                    PetView(petName: "Tuffy", imageName: "Dogs")
-                        .padding(.horizontal, 4)
-                        .background(.gray)
-                        .cornerRadius(8)
-                    PetView(petName: "Add Animal", imageName: "Dogs")
-                        .padding(.horizontal, 4)
-                        .background(.gray)
-                        .cornerRadius(8)
-                }
             }
             .padding(.top,-430)
         }

@@ -28,13 +28,13 @@ struct RegistrationBoxView: View {
                     
                     Spacer()
                     
-                    Button(action: {}, label: {
+                    NavigationLink(destination:JobsServicesView()){
                         Text("Register Now")
                             .foregroundStyle(.white)
                             .frame(width: 110,height: 40)
                             .background(.appYellow)
                             .clipShape(RoundedRectangle(cornerRadius: 8))
-                    })
+                    }
                 }
                 .padding(.horizontal,30)
             }
