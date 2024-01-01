@@ -25,11 +25,10 @@ struct UserProfileView: View {
                             
                             HStack(spacing: 2){
                                 Text("+91 9876543210")
-                                Divider()
+                                Text(" ")
                                 Text("test123@gmail.com")
-                                
-                                Spacer()
                             }
+
                         }
                         Image("profilepic-1")
                             .resizable()
@@ -46,7 +45,13 @@ struct UserProfileView: View {
             .edgesIgnoringSafeArea(.top)
             .offset(y:-80)
             VStack{
+                MyFavTabView()
+                    .shadow(radius: 5)
+                
+                Spacer(minLength: 15)
+                
                 RegistrationBoxView()
+                    .shadow(radius: 10)
                 VStack{
                     Text("My Pets")
                         .fontWeight(.semibold)

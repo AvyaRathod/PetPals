@@ -39,6 +39,7 @@ struct RegistrationBoxView: View {
                 .padding(.horizontal,30)
             }
         }
+        .shadow(radius: 20)
     }
 }
 
