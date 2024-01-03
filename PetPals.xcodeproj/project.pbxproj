@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F2C79EC2B441365008042AF /* ListingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2C79EB2B441365008042AF /* ListingView.swift */; };
+		0F2C79EE2B44535F008042AF /* FavPalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2C79ED2B44535F008042AF /* FavPalView.swift */; };
 		0F848A702B3084AC006594CF /* AddAnimalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F848A6F2B3084AC006594CF /* AddAnimalView.swift */; };
 		0F8DE2432B31F490003B6EB1 /* AboutMeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8DE2422B31F490003B6EB1 /* AboutMeView.swift */; };
 		0F8DE24D2B3215C4003B6EB1 /* SelectYourPetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8DE24C2B3215C4003B6EB1 /* SelectYourPetsView.swift */; };
@@ -55,6 +57,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F2C79EB2B441365008042AF /* ListingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingView.swift; sourceTree = "<group>"; };
+		0F2C79ED2B44535F008042AF /* FavPalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavPalView.swift; sourceTree = "<group>"; };
 		0F848A6F2B3084AC006594CF /* AddAnimalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAnimalView.swift; sourceTree = "<group>"; };
 		0F8DE2422B31F490003B6EB1 /* AboutMeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutMeView.swift; sourceTree = "<group>"; };
 		0F8DE24C2B3215C4003B6EB1 /* SelectYourPetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectYourPetsView.swift; sourceTree = "<group>"; };
@@ -202,6 +206,8 @@
 				0F8DE3DE2B3753E100C2E40D /* PalProfileView.swift */,
 				0F8DE3E62B385F1C00C2E40D /* UserProfileView.swift */,
 				41E64B972B3375C300D1B25E /* JobsServicesView.swift */,
+				0F2C79EB2B441365008042AF /* ListingView.swift */,
+				0F2C79ED2B44535F008042AF /* FavPalView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -335,6 +341,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F2C79EE2B44535F008042AF /* FavPalView.swift in Sources */,
 				415BDC402B31DC2800103E59 /* MessageView.swift in Sources */,
 				0F8DE3E92B386A0900C2E40D /* RegistrationBoxView.swift in Sources */,
 				419369692B2DD77200E8694E /* RequestView.swift in Sources */,
@@ -351,6 +358,7 @@
 				415043192B23BD8500359C47 /* HomeView.swift in Sources */,
 				418035B82B39F8060083B804 /* BookingPlacard.swift in Sources */,
 				41E64B962B33531D00D1B25E /* ServicePlacardView.swift in Sources */,
+				0F2C79EC2B441365008042AF /* ListingView.swift in Sources */,
 				418035BA2B3AC2A50083B804 /* ResultsView.swift in Sources */,
 				4184F24C2B2362E50091747C /* PetPalsApp.swift in Sources */,
 				0F8DE2432B31F490003B6EB1 /* AboutMeView.swift in Sources */,
