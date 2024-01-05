@@ -11,13 +11,13 @@ struct PalsNearbyView: View {
     var serviceName: String
     
     let pals: [Pal] = [
-        Pal(name: "Jack Bird", pets: "Dogs, Cats"),
-        Pal(name: "Rimi Lan", pets: "Dogs, Cats"),
-        Pal(name: "iock Bird", pets: "Dogs, Cats"),
-        Pal(name: "Rdemi Lan", pets: "Dogs, Cats"),
-        Pal(name: "Jacrk Bird", pets: "Dogs, Cats"),
-        Pal(name: "Rimie Lan", pets: "Dogs, Cats"),
-        Pal(name: "Jack wBird", pets: "Dogs, Cats"),
+        Pal(name: "Jack Bird", pets: "Dogs, Cats", userimage:  "p1"),
+        Pal(name: "Rimi Lan", pets: "Dogs, Cats", userimage:  "p2"),
+        Pal(name: "iock Bird", pets: "Dogs, Cats", userimage:  "p3"),
+        Pal(name: "Rdemi Lan", pets: "Dogs, Cats", userimage:  "p4"),
+        Pal(name: "Jacrk Bird", pets: "Dogs, Cats", userimage:  "p5"),
+        Pal(name: "Rimie Lan", pets: "Dogs, Cats", userimage:  "p11"),
+        Pal(name: "Jack wBird", pets: "Dogs, Cats", userimage:  "p12"),
         // ... more pals
     ]
     
@@ -62,7 +62,7 @@ struct PalsNearbyView: View {
                 ScrollView {
                     LazyVGrid(columns: columns, spacing: 0) {
                         ForEach(pals, id: \.id) { pal in
-                            PalView(palName: pal.name, palPets: pal.pets, imageName: "userimage")
+                            PalView(palName: pal.name, palPets: pal.pets, imageName: pal.userimage)
                                 .padding(8)
                         }
                     }
@@ -78,6 +78,7 @@ struct Pal: Identifiable {
     let id = UUID()
     let name: String
     let pets: String
+    let userimage: String
 }
 
 
