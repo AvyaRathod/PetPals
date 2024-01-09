@@ -17,15 +17,17 @@ struct PetView: View {
                 Image(imageName)
                     .resizable()
                     .scaledToFill()
-                    .frame(width: 150, height: 150)
+                    .frame(width: 150, height: 180)
                     .clipped()
                     .cornerRadius(8)
+                    
                 
                 Text(petName)
                     .font(.headline)
-                    .foregroundColor(.white) 
+                    .foregroundColor(.white)
                     .padding([.horizontal], 8)
                     .lineLimit(1)
+                    .padding(.bottom)
             }
             .frame(width: 150, height: 190)
             .background(Color.clear)
@@ -49,5 +51,5 @@ struct PetProfileView: View {
 }
 
 #Preview {
-    PetView(petName: "Haley Manal", imageName: "Dogs")
+    PetView(petName: "Haley Manal", imageName: "p1")
 }

@@ -25,11 +25,11 @@ struct OnboardingView: View {
             Spacer()
             
             TabView(selection: $currentPage) {
-                SplashScreenView(text: "Welcome to PetPals!", imageName: "1", currentPage: $currentPage)
+                SplashScreenView(text: "Welcome to PetPals!", imageName: "petimage-1", currentPage: $currentPage)
                     .tag(0)
-                SplashScreenView(text: "Connect with pet lovers!", imageName: "2", currentPage: $currentPage)
+                SplashScreenView(text: "Connect with pet lovers!", imageName: "petimage-2", currentPage: $currentPage)
                     .tag(1)
-                SplashScreenView(text: "Find the perfect sitter!", imageName: "3", currentPage: $currentPage)
+                SplashScreenView(text: "Find the perfect sitter!", imageName: "petimage-3", currentPage: $currentPage)
                     .tag(2)
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
@@ -77,7 +77,7 @@ struct SplashScreenView: View {
     var body: some View {
         VStack {
             // Placeholder for image
-            Image(systemName: imageName)
+            Image(imageName)
                 .resizable()
                 .scaledToFit()
                 .frame(height: 300)

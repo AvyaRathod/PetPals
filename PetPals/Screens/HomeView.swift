@@ -61,9 +61,9 @@ struct HomeView: View {
                     .padding(.horizontal)
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
-                            PalView(palName: "Jack Bird", palPets: "Dogs, Cats", imageName: "userimage")
-                            PalView(palName: "Rimi Lan", palPets: "Dogs, Cats",imageName: "userimage")
-                            PalView(palName: "Rimi Lan", palPets: "Dogs, Cats",imageName: "userimage")
+                            PalView(palName: "Jack Bird", palPets: "Dogs, Cats", imageName: "p1")
+                            PalView(palName: "Rimi Lan", palPets: "Dogs, Cats",imageName: "p2")
+                            PalView(palName: "Rimi Lan", palPets: "Dogs, Cats",imageName: "p3")
                         }
                     }
                     .padding(.horizontal)
@@ -92,9 +92,9 @@ struct HomeView: View {
                     .padding(.vertical, 7.0)
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
-                            PetView(petName: "Tuffy", imageName: "Dogs")
-                            PetView(petName: "Jerry", imageName: "Dogs")
-                            PetView(petName: "Oreo", imageName: "Dogs")
+                            PetView(petName: "Tuffy", imageName: "p10")
+                            PetView(petName: "Jerry", imageName: "p6")
+                            PetView(petName: "Oreo", imageName: "p12")
                         }
                     }
                     .padding(.horizontal)

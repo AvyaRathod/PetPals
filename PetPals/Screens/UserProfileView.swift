@@ -41,7 +41,7 @@ struct UserProfileView: View {
                     .padding(.top,120)
                     .padding(.horizontal)
                     
-                }
+                }.offset(y:-25)
                 .padding(.bottom, 360)
                 .edgesIgnoringSafeArea(.top)
                 .offset(y:-80)
