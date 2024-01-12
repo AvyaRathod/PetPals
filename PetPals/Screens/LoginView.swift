@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct LoginView: View {
+    @EnvironmentObject var userAuth: UserAuth
+    
+    @State private var shouldNavigate = false
     @State private var email = ""
     @State private var password = ""
     
@@ -27,7 +30,7 @@ struct LoginView: View {
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 
                 Spacer()
-
+                
                 // text fields
                 VStack {
                     TextField("Enter your email", text: $email)
@@ -55,9 +58,12 @@ struct LoginView: View {
                 }
                 .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/,alignment: .trailing)
                 
-                Button {
-                    print ("Login")
-                }label: {
+                Button(action: {
+                    // Perform login actions here
+                    userAuth.isLoggedIn = true
+                    shouldNavigate = true
+                }) {
+                    
                     Text ("Login" )
                         . font (.subheadline)
                         . fontWeight(.semibold)
@@ -67,6 +73,7 @@ struct LoginView: View {
                         .cornerRadius (8)
                 }
                 . padding (.vertical)
+                
                 HStack {
                     Rectangle()
                         .frame(width: (UIScreen.main.bounds.width / 2) - 40, height: 0.5)
@@ -80,9 +87,9 @@ struct LoginView: View {
                 
                 //sign in with apple
                 HStack {
-                    Image ("apple_logo")
+                    Image (systemName: "applelogo")
                         .resizable ()
-                        .frame(width: 20, height: 20)
+                        .frame(width: 20, height: 25)
                     Text ("Continue with Apple")
                         .font (.footnote)
                         . fontWeight(.semibold)
@@ -91,24 +98,21 @@ struct LoginView: View {
                 .padding(. top, 8)
                 Spacer()
                 
-                Divider ()
-                
-                NavigationLink{
-                Text ("Sign up")}
-            label: {
-                HStack(spacing: 3){
-                    Text ("Don't have an account?")
-                    Text ("Sign Up")
-                        . fontWeight (.semibold)
+            }
+            .navigationDestination(for: Bool.self) { isLoggedIn in
+                if isLoggedIn {
+                    CheckoutView()
                 }
-                .font (.footnote)
             }
-            . padding(.vertical, 16)
-            }
+        }
+        .onChange(of: userAuth.isLoggedIn) {
+                    shouldNavigate = userAuth.isLoggedIn
         }
     }
 }
 
 #Preview {
-    LoginView()
+    LoginView()            
+        .environmentObject(UserAuth())
+
 }

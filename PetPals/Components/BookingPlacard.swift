@@ -19,14 +19,16 @@ struct Results: Identifiable {
 struct BookingPlacard: View {
     let results: Results
 
+    @EnvironmentObject var userAuth: UserAuth
+    
     @State private var isFavorite: Bool = false
     
     var body: some View {
         NavigationLink(destination: PalProfileView(palName: results.name)) {
             ZStack(alignment: .topTrailing) {
                 RoundedRectangle(cornerRadius: 20)
-                    .fill(Color(#colorLiteral(red: 0.96, green: 0.91, blue: 0.87, alpha: 1)))
-                    .frame(width: 346, height: 167)
+                    .fill(Color.clear)
+                    .frame(width: 360, height: 167)
                     .overlay(
                         VStack {
                             HStack {
@@ -62,8 +64,7 @@ struct BookingPlacard: View {
                                             .foregroundColor(.gray)
                                         
                                         //add conditional routing here: if already logged in, lead to a confirmation page-> payment options-> booking successful/failed page
-                                        NavigationLink(destination:LoginView()){
-                                            Text("Book")
+                                        NavigationLink(destination: ConditionalView().environmentObject(userAuth)) {                                            Text("Book")
                                                 .foregroundColor(.white)
                                                 .padding()
                                                 .frame(width: 179.0, height: 23.0)
@@ -95,6 +96,21 @@ struct BookingPlacard: View {
     }
 }
 
+struct ConditionalView: View {
+    @EnvironmentObject var userAuth: UserAuth
+    
+    var body: some View {
+        Group {
+            if userAuth.isLoggedIn {
+                CheckoutView()
+            } else {
+                LoginView()
+            }
+        }
+    }
+}
+
+
 // Preview
 struct BookingPlacard_Previews: PreviewProvider {
     static var previews: some View {
@@ -106,5 +122,6 @@ struct BookingPlacard_Previews: PreviewProvider {
             .previewLayout(.sizeThatFits)
             .padding()
             .background(Color(white: 0.9))
+            .environmentObject(UserAuth())
     }
 }

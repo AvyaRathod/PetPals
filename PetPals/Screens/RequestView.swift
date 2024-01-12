@@ -28,7 +28,6 @@ struct RequestView: View {
                 .frame(height: 240) // Set the height you want for the rounded rectangle
             
             HStack(spacing: 3) {
-                // Replace these with actual images and titles for your services
                 ServiceIconView(serviceName: "Boarding", imageName: "boarding-icon")
                 ServiceIconView(serviceName: "Daycare", imageName: "daycare-icon")
                 ServiceIconView(serviceName: "Sitting", imageName: "sitting-icon")
@@ -130,7 +129,7 @@ struct RequestView: View {
                     .foregroundColor(.white)
                     .padding()
                     .frame(width: 363)
-                    .background(Color.brown)
+                    .background(Color.appYellow)
                     .cornerRadius(8)
             }
             .toolbar(.hidden)
@@ -140,6 +139,7 @@ struct RequestView: View {
         Spacer()
         
     }
+    
 }
 
 struct ServiceIconView: View {

@@ -41,6 +41,7 @@ struct ResultsView: View {
                                                             stars: 5,
                                                             address: "123 anywhere st. any city state country 123",
                                                             cost: "150"))
+                            Divider()
                         }
                     }
                 }
@@ -72,6 +73,7 @@ struct ResultsView_Previews: PreviewProvider {
 
     static var previews: some View {
         ResultsView(destination: $mockDestination, startDate: $mockStartDate, endDate: $mockEndDate, startTime: $mockStartDate, endTime: $mockEndDate)
-            .previewLayout(.sizeThatFits) // You can change this to fit your preview needs
+            .previewLayout(.sizeThatFits)
+            .environmentObject(UserAuth())// You can change this to fit your preview needs
     }
 }

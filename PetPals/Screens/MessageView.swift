@@ -46,9 +46,10 @@ struct MessageView: View {
                     }
                     .padding(.horizontal)
                 }
-                .navigationTitle("Messages")
+                
             }
         }
+        .navigationTitle("Messages")
     }
 }
 

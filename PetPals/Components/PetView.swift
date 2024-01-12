@@ -12,7 +12,7 @@ struct PetView: View {
     var imageName: String
     
     var body: some View {
-        NavigationLink(destination: PetProfileView(petOwnerName: petName)) {
+        NavigationLink(destination: PetProfileView(petName: petName)) {
             VStack(alignment: .leading, spacing: 0) {
                 Image(imageName)
                     .resizable()
@@ -20,33 +20,30 @@ struct PetView: View {
                     .frame(width: 150, height: 180)
                     .clipped()
                     .cornerRadius(8)
+                    .shadow(radius: 15)
                     
                 
                 Text(petName)
                     .font(.headline)
-                    .foregroundColor(.white)
-                    .padding([.horizontal], 8)
+                    .foregroundColor(.black)
+                    .padding([.vertical], 4)
                     .lineLimit(1)
                     .padding(.bottom)
             }
             .frame(width: 150, height: 190)
             .background(Color.clear)
             .cornerRadius(8)
-            .overlay(
-                RoundedRectangle(cornerRadius: 8)
-                    .stroke(Color.gray, lineWidth: 1)
-            )
-            .shadow(radius: 10) // Shadow for the card
+            
         }
     }
 }
 
 struct PetProfileView: View {
-    var petOwnerName: String
+    var petName: String
 
     var body: some View {
-        Text("Profile of \(petOwnerName)'s pet")
-            .navigationTitle(petOwnerName)
+        Text("Profile of \(petName)'s pet")
+            .navigationTitle(petName)
     }
 }
 

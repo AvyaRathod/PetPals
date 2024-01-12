@@ -23,6 +23,8 @@ struct PalView: View {
                         .frame(width: 150, height: 150)
                         .clipped()
                         .cornerRadius(8)
+                        .shadow(radius:10)
+
                     
                     Button(action: {
                         isFavorite.toggle()
@@ -30,39 +32,35 @@ struct PalView: View {
                         Image(systemName: isFavorite ? "heart.fill" : "heart")
                             .foregroundColor(isFavorite ? .red : .white)
                             .padding(8)
-                            .background(Color.black.opacity(0.6))
+                            .background(Color.black.opacity(0.2))
                             .clipShape(Circle())
+                        
                     }
                     .offset(x: -5, y: 10)
                 }
                 
-                Text(palName)
-                    .font(.headline)
-                    .foregroundColor(.white) // White font color for the text
-                    .padding([.horizontal], 8)
-                    .lineLimit(1)
-                Text(palPets)
-                    .font(.subheadline)
-                    .foregroundColor(.white)
-                    .padding([.leading, .bottom], 8)
-                    .lineLimit(1)
+                VStack(alignment: .leading, spacing: 0){
+                    Text(palName)
+                        .font(.headline)
+                        .foregroundColor(.black)
+                        .lineLimit(1)
+                    Text(palPets)
+                        .font(.subheadline)
+                        .foregroundColor(.black)
+                        .lineLimit(1)
+                }.padding([.vertical],3)
             }
             .frame(width: 150, height: 190)
             .background(Color.clear)
             .cornerRadius(8)
-            .overlay(
-                RoundedRectangle(cornerRadius: 8)
-                    .stroke(Color.gray, lineWidth: 1)
-            )
-            .shadow(radius: 10) // Shadow for the card
+            
         }
     }
 }
 
 // Preview
 #Preview {
-    PalView(palName: "Lorem ipsun", palPets: "Dog, cat", imageName: "user image")
+    PalView(palName: "Lorem ipsun", palPets: "Dog, cat", imageName: "p11")
         .previewLayout(.sizeThatFits)
                     .padding()
-                    .background(Color(white: 0.9))
 }

@@ -9,13 +9,17 @@ import SwiftUI
 import MapKit
 
 struct PalProfileView: View {
+    
+    @EnvironmentObject var userAuth: UserAuth
+    
     var palName: String
     
     var body: some View {
-        ScrollView{
-            ImageCarouselView()
-            
-            
+        VStack{
+            ScrollView{
+                ImageCarouselView()
+                
+                
                 HStack(){
                     Image("profilepic-1")
                         .resizable()
@@ -65,38 +69,41 @@ struct PalProfileView: View {
                             .frame(height: 200)
                             .clipShape(RoundedRectangle(cornerRadius: 12))
                     }
-            }
-                .padding(.horizontal)
-        }
-        .padding(.bottom, 64)
-        .overlay(alignment: .bottom){
-            VStack{
-                Divider()
-                    .padding(.bottom)
-                
-                HStack{
-                    VStack(alignment: .leading){
-                        Text("Boarding INR 150/Night")
-                            .foregroundStyle(.white)
-                            .fontWeight(.semibold)
-                    }
-                    Spacer()
-                    
-                    Button(action: {}, label: {
-                        Text("Contact")
-                            .foregroundStyle(.white)
-                            .frame(width: 140,height: 40)
-                            .background(.appYellow)
-                            .clipShape(RoundedRectangle(cornerRadius: 8))
-                    })
                 }
                 .padding(.horizontal)
             }
-            .background(.appBrown)
+            .padding(.bottom,80)
+            .overlay(alignment: .bottom){
+                VStack{
+                    Divider()
+                        .padding(.bottom)
+                    
+                    HStack{
+                        VStack(alignment: .leading){
+                            Text("Boarding INR 150/Night")
+                                .foregroundStyle(.white)
+                                .fontWeight(.semibold)
+                        }
+                        Spacer()
+                        
+                        NavigationLink(destination: ConditionalView().environmentObject(userAuth)){
+                            Text("Book")
+                                .foregroundStyle(.white)
+                                .frame(width: 140,height: 40)
+                                .background(.appYellow)
+                                .clipShape(RoundedRectangle(cornerRadius: 8))
+                        }
+                    }
+                    .padding(.horizontal)
+                }
+                .background(.appBrown)
+            }
         }
     }
 }
 
 #Preview {
     PalProfileView(palName: "palName")
+        .environmentObject(UserAuth())
+
 }

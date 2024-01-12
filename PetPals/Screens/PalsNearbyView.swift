@@ -27,12 +27,6 @@ struct PalsNearbyView: View {
         GridItem(.flexible(), spacing: 0)
     ]
     
-    let gradient = LinearGradient(
-        gradient: Gradient(colors: [Color("app_brown"), Color.white]),
-        startPoint: .top,
-        endPoint: UnitPoint(x: 0.5, y: 2)
-    )
-    
     // State to show/hide the filter options
     @State private var showFilters = false
     
@@ -69,7 +63,6 @@ struct PalsNearbyView: View {
                 }
             }
             .navigationTitle("Pals Nearby")
-            .background(gradient)
         }
     }
 }
