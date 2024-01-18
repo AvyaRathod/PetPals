@@ -35,6 +35,7 @@
 		419369652B2CB22400E8694E /* PalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419369642B2CB22400E8694E /* PalView.swift */; };
 		419369672B2D03E300E8694E /* PetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419369662B2D03E300E8694E /* PetView.swift */; };
 		419369692B2DD77200E8694E /* RequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419369682B2DD77200E8694E /* RequestView.swift */; };
+		41A2595F2B59836000097E06 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A2595E2B59836000097E06 /* RadioButton.swift */; };
 		41E64B962B33531D00D1B25E /* ServicePlacardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E64B952B33531D00D1B25E /* ServicePlacardView.swift */; };
 		41E64B982B3375C300D1B25E /* JobsServicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E64B972B3375C300D1B25E /* JobsServicesView.swift */; };
 		41F6F1522B30D2D4003069EC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F6F1512B30D2D4003069EC /* LoginView.swift */; };
@@ -89,6 +90,7 @@
 		419369642B2CB22400E8694E /* PalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PalView.swift; sourceTree = "<group>"; };
 		419369662B2D03E300E8694E /* PetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetView.swift; sourceTree = "<group>"; };
 		419369682B2DD77200E8694E /* RequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestView.swift; sourceTree = "<group>"; };
+		41A2595E2B59836000097E06 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		41E64B952B33531D00D1B25E /* ServicePlacardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicePlacardView.swift; sourceTree = "<group>"; };
 		41E64B972B3375C300D1B25E /* JobsServicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobsServicesView.swift; sourceTree = "<group>"; };
 		41F6F1512B30D2D4003069EC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				418035B72B39F8060083B804 /* BookingPlacard.swift */,
 				41E64B952B33531D00D1B25E /* ServicePlacardView.swift */,
 				0F9870892B42F60A0028B1F9 /* MyFavTabView.swift */,
+				41A2595E2B59836000097E06 /* RadioButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 				0F98708A2B42F60A0028B1F9 /* MyFavTabView.swift in Sources */,
 				0F848A702B3084AC006594CF /* AddAnimalView.swift in Sources */,
 				0F8DE3E72B385F1C00C2E40D /* UserProfileView.swift in Sources */,
+				41A2595F2B59836000097E06 /* RadioButton.swift in Sources */,
 				415043192B23BD8500359C47 /* HomeView.swift in Sources */,
 				418035B82B39F8060083B804 /* BookingPlacard.swift in Sources */,
 				41E64B962B33531D00D1B25E /* ServicePlacardView.swift in Sources */,

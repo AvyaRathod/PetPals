@@ -46,25 +46,14 @@ struct PetPalsApp: App {
 struct MainTabView: View {
     @EnvironmentObject var userAuth: UserAuth
     
-    @State private var selectedTab: Int = 0
-
     var body: some View {
-        TabView(selection: $selectedTab) {
+        TabView{
             NavigationStack {
                 HomeView()
             }
             .tabItem {
                 Label("Explore", systemImage: "magnifyingglass")
             }
-            .tag(0)
-
-            NavigationStack {
-                RequestView()
-            }
-            .tabItem {
-                Label("Requests", systemImage: "paperplane")
-            }
-            .tag(1)
 
             NavigationStack {
                 MessageView()
@@ -72,7 +61,6 @@ struct MainTabView: View {
             .tabItem {
                 Label("Messages", systemImage: "message")
             }
-            .tag(2)
         }
     }
 }

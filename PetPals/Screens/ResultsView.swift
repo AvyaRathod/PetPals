@@ -40,7 +40,8 @@ struct ResultsView: View {
                                                             name: "Rimi Lan",
                                                             stars: 5,
                                                             address: "123 anywhere st. any city state country 123",
-                                                            cost: "150"))
+                                                            cost: "150")
+                                           )
                             Divider()
                         }
                     }
@@ -77,3 +78,4 @@ struct ResultsView_Previews: PreviewProvider {
             .environmentObject(UserAuth())// You can change this to fit your preview needs
     }
 }
+

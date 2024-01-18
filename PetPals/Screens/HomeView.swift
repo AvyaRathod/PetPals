@@ -11,6 +11,7 @@ struct HomeView: View {
     
     @State private var searchText = ""
     
+    
     var body: some View {
             ScrollView {
                 VStack(alignment: .leading) {
@@ -63,26 +64,6 @@ struct HomeView: View {
                     }
                     .padding(.horizontal)
                     
-                    // Pets in the Community Section
-                    HStack {
-                        Text("Pets nearby")
-                            .font(.headline)
-                            .foregroundColor(Color.black)
-                        
-                        Spacer()
-                        
-                    }
-                    .padding(.horizontal, 17.0)
-                    .padding(.vertical, 7.0)
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack {
-                            PetView(petName: "Tuffy", imageName: "p10")
-                            PetView(petName: "Jerry", imageName: "p6")
-                            PetView(petName: "Oreo", imageName: "p12")
-                        }
-                    }
-                    .padding(.horizontal)
-                    
                     // Become a Sitter Banner
                     ZStack {
                         // Background image
@@ -117,6 +98,29 @@ struct HomeView: View {
                         .cornerRadius(10)
                     }
                     .padding()
+                    
+                    // explore section
+                    VStack(alignment: .leading) {
+                        Text("12 pals to explore")
+                            .font(.headline)
+                            .foregroundColor(Color.black)
+                        Divider()
+                            .frame(width: 200.0)
+                        
+                        ScrollView {
+                            LazyVStack(spacing: 8) {
+                                ForEach(0..<10) { index in // Replace with actual data source
+                                    BookingPlacard(results: Results(img: "petimage-1",
+                                                                    name: "Rimi Lan",
+                                                                    stars: 5,
+                                                                    address: "123 anywhere st. any city state country 123",
+                                                                    cost: "150"))
+                                    
+                                    Divider()
+                                }
+                            }
+                        }
+                    }.padding()
                     
                 }
             }

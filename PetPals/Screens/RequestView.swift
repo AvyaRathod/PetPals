@@ -14,56 +14,46 @@ enum SearchOptions{
 }
 
 struct RequestView: View {
-    @State private var destination = ""
+    let results: Results
+    
     @State private var selectedOption: SearchOptions = .location
+    let services = ["daycare", "dayboarding", "sitting", "walking"]
+    let pets = ["Tuffy", "Jerry", "Max", "Buddy"]
+    @EnvironmentObject var userAuth: UserAuth
+    
+    @State private var selectedPets: Set<String> = []
+    @State private var selectedService = ""
+    @State private var destination = ""
     @State private var startDate = Date()
     @State private var endDate = Date()
     @State private var startTime = Date()
     @State private var endTime = Date()
     
+    let columns: [GridItem] = [
+        GridItem(.flexible(), spacing: -20),
+        GridItem(.flexible(), spacing: 0)
+    ]
+    
     var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 25, style: .continuous)
-                .fill(Color("app_yellow")) // Use the color you want for the rounded rectangle
-                .frame(height: 240) // Set the height you want for the rounded rectangle
-            
-            HStack(spacing: 3) {
-                ServiceIconView(serviceName: "Boarding", imageName: "boarding-icon")
-                ServiceIconView(serviceName: "Daycare", imageName: "daycare-icon")
-                ServiceIconView(serviceName: "Sitting", imageName: "sitting-icon")
-                ServiceIconView(serviceName: "Walking", imageName: "walking-icon")
-            }
-            .padding(.top, 120.0)
-        }
-        .edgesIgnoringSafeArea(.top)
-        .offset(y:-80)
-        
         //search menu
         VStack{
+            Spacer()
             VStack(alignment: .leading) {
                 if selectedOption == .location {
-                    Text ("Where do you want the service?")
+                    Text ("What service do you want?")
                         .font(.title2)
                         .fontWeight(.semibold)
-                    HStack {
-                        Image(systemName: "magnifyingglass")
-                            .imageScale (.small)
-                        TextField("Search destinations", text: $destination)
-                            .font (.subheadline)
+                    ScrollView {
+                        RadioButtonGroup(items: services, selectedId: $selectedService)
                     }
-                    . frame (height: 44)
                     . padding(.horizontal)
-                    .overlay {
-                        RoundedRectangle (cornerRadius: 8)
-                            .stroke (lineWidth: 1.0)
-                            . foregroundStyle (Color (.systemGray4))
-                    }
+                    
                 }else{
-                    CollapsedPickerView(title: "Where", description: "Add location")
+                    CollapsedPickerView(title: "Service", description: "Select a service")
                 }
             }
             .padding()
-            .frame(height: selectedOption == .location ? 120 : 64)
+            .frame(height: selectedOption == .location ? 160 : 64)
             .background (.white)
             .clipShape (RoundedRectangle (cornerRadius: 12))
             .padding()
@@ -108,7 +98,27 @@ struct RequestView: View {
                         .font (.title2)
                         .fontWeight (.semibold)
                     
-                    SelectYourPetsView()
+                    ScrollView {
+                        LazyVGrid(columns: columns, spacing: 20){
+                            ForEach(pets, id: \.self) { petName in
+                                SelectPetView(petName: petName, isSelected: selectedPets.contains(petName))
+                                    .onTapGesture {
+                                        if selectedPets.contains(petName) {
+                                            selectedPets.remove(petName)
+                                        } else {
+                                            selectedPets.insert(petName)
+                                        }
+                                    }
+                                    .padding(.horizontal, 4)
+                                    .background(.gray)
+                                    .cornerRadius(8)
+                            }
+                            AddAnimal(petName: "Add Animal", imageName: "p13")
+                                .padding(.horizontal, 4)
+                                .background(.gray)
+                                .cornerRadius(8)
+                        }
+                    }
                     
                 }else{
                     CollapsedPickerView(title: "Pets?", description: "Add Pets")
@@ -124,22 +134,25 @@ struct RequestView: View {
                 withAnimation(.snappy) { selectedOption = .pets }
             }
             
-            NavigationLink(destination: ResultsView(destination: $destination, startDate: $startDate, endDate: $endDate, startTime: $startTime, endTime: $endTime)){
-                Text("Search")
+            NavigationLink(destination: ConditionalView(results: Results(img: results.img,
+                                                                         name: results.name,
+                                                                         stars: results.stars,
+                                                                         address: results.address,
+                                                                         cost: results.cost),
+                                                        startDate: $startDate,
+                                                        endDate: $endDate,
+                                                        startTime: $startTime,
+                                                        endTime: $endTime).environmentObject(userAuth)) {                                            Text("Book")
                     .foregroundColor(.white)
                     .padding()
                     .frame(width: 363)
                     .background(Color.appYellow)
                     .cornerRadius(8)
             }
-            .toolbar(.hidden)
+            Spacer()
         }
         .offset(y:-60)
-        
-        Spacer()
-        
     }
-    
 }
 
 struct ServiceIconView: View {
@@ -180,8 +193,42 @@ struct CollapsedPickerView: View{
     }
 }
 
+struct ConditionalView: View {
+    @EnvironmentObject var userAuth: UserAuth
+    
+    let results: Results
+    @Binding var startDate: Date
+    @Binding var endDate: Date
+    @Binding var startTime: Date
+    @Binding var endTime: Date
+    
+    var body: some View {
+        Group {
+            if userAuth.isLoggedIn {
+                CheckoutView(results: results,
+                             startDate: $startDate,
+                             endDate: $endDate,
+                             startTime: $startTime,
+                             endTime: $endTime)
+            } else {
+                LoginView(results: results,
+                          startDate: $startDate,
+                          endDate: $endDate,
+                          startTime: $startTime,
+                          endTime: $endTime)
+            }
+        }
+    }
+}
 
-
-#Preview {
-    RequestView()
+struct RequestView_Previews: PreviewProvider {
+    
+    static var previews: some View {
+        RequestView(results: Results(img: "petimage-1",
+                                     name: "Rimi Lan",
+                                     stars: 5,
+                                     address: "123 anywhere st. any city state country 123",
+                                     cost: "150"))
+        .environmentObject(UserAuth())
+    }
 }

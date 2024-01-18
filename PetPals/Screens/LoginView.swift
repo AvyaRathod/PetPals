@@ -14,6 +14,13 @@ struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
     
+    let results: Results
+    
+    @Binding var startDate: Date
+    @Binding var endDate: Date
+    @Binding var startTime: Date
+    @Binding var endTime: Date
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -101,7 +108,11 @@ struct LoginView: View {
             }
             .navigationDestination(for: Bool.self) { isLoggedIn in
                 if isLoggedIn {
-                    CheckoutView()
+                    CheckoutView(results: results,
+                                 startDate: $startDate,
+                                 endDate: $endDate,
+                                 startTime: $startTime,
+                                 endTime: $endTime)
                 }
             }
         }
@@ -111,8 +122,19 @@ struct LoginView: View {
     }
 }
 
-#Preview {
-    LoginView()            
+struct LoginView_Previews: PreviewProvider {
+    @State static var mockDestination: String = "Guduvancheri, India"
+    @State static var mockStartDate: Date = Date()
+    @State static var mockEndDate: Date = Date()
+    
+    static var previews: some View {
+        LoginView(results: Results(img: "petimage-1",
+                                   name: "Rimi Lan",
+                                   stars: 5,
+                                   address: "123 anywhere st. any city state country 123",
+                                   cost: "150"),
+                  startDate: $mockStartDate, endDate: $mockEndDate, startTime: $mockStartDate, endTime: $mockEndDate)
         .environmentObject(UserAuth())
-
+        
+    }
 }

@@ -14,7 +14,7 @@ struct PalView: View {
     @State private var isFavorite: Bool = false
     
     var body: some View {
-        NavigationLink(destination: PalProfileView(palName: palName)) {
+//        NavigationLink(destination: PalProfileView(palName: palName)) {
             VStack(alignment: .leading, spacing: 0) {
                 ZStack(alignment: .topTrailing) {
                     Image(imageName)
@@ -54,7 +54,7 @@ struct PalView: View {
             .background(Color.clear)
             .cornerRadius(8)
             
-        }
+//        }
     }
 }
 

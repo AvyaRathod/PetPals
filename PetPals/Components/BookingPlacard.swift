@@ -19,16 +19,15 @@ struct Results: Identifiable {
 struct BookingPlacard: View {
     let results: Results
 
-    @EnvironmentObject var userAuth: UserAuth
     
     @State private var isFavorite: Bool = false
     
     var body: some View {
-        NavigationLink(destination: PalProfileView(palName: results.name)) {
+        NavigationLink(destination: PalProfileView(results: results,palName: results.name)) {
             ZStack(alignment: .topTrailing) {
                 RoundedRectangle(cornerRadius: 20)
-                    .fill(Color.clear)
-                    .frame(width: 360, height: 167)
+                    .fill(Color.white)
+                    .frame(width: 364, height: 167)
                     .overlay(
                         VStack {
                             HStack {
@@ -44,6 +43,7 @@ struct BookingPlacard: View {
                                         Text(results.name)
                                             .font(.title2)
                                             .fontWeight(.bold)
+                                            .foregroundColor(.black)
                                         
                                         HStack {
                                             ForEach(0..<results.stars, id: \.self) { _ in
@@ -64,13 +64,20 @@ struct BookingPlacard: View {
                                             .foregroundColor(.gray)
                                         
                                         //add conditional routing here: if already logged in, lead to a confirmation page-> payment options-> booking successful/failed page
-                                        NavigationLink(destination: ConditionalView().environmentObject(userAuth)) {                                            Text("Book")
-                                                .foregroundColor(.white)
-                                                .padding()
-                                                .frame(width: 179.0, height: 23.0)
-                                                .background(Color.brown)
-                                                .cornerRadius(10)
-                                        }
+                                        
+                                        // if you want to give the book button on the placcard
+                                        
+//                                        NavigationLink(destination: ConditionalView(results: Results(img: results.img,
+//                                                                                                     name: results.name,
+//                                                                                                     stars: results.stars,
+//                                                                                                     address: results.address,
+//                                                                                                     cost: results.cost)).environmentObject(userAuth)) {                                            Text("Book")
+//                                                .foregroundColor(.white)
+//                                                .padding()
+//                                                .frame(width: 179.0, height: 23.0)
+//                                                .background(Color.brown)
+//                                                .cornerRadius(10)
+//                                        }
                                     }
                                     .offset(x:13,y:10)
                                     
@@ -96,23 +103,9 @@ struct BookingPlacard: View {
     }
 }
 
-struct ConditionalView: View {
-    @EnvironmentObject var userAuth: UserAuth
-    
-    var body: some View {
-        Group {
-            if userAuth.isLoggedIn {
-                CheckoutView()
-            } else {
-                LoginView()
-            }
-        }
-    }
-}
-
-
 // Preview
 struct BookingPlacard_Previews: PreviewProvider {
+   
     static var previews: some View {
         BookingPlacard(results: Results(img: "petimage-1",
                                         name: "Rimi Lan",

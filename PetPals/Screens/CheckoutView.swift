@@ -9,6 +9,13 @@ import SwiftUI
 
 struct CheckoutView: View {
     
+    let results: Results
+    
+    @Binding var startDate: Date
+    @Binding var endDate: Date
+    @Binding var startTime: Date
+    @Binding var endTime: Date
+    
     let propertyName = "Grand Mainguet"
     let propertyRating = 9.0
     let propertyAddress = "Le Grand Mainguet, Saint-Lambert-la-Potherie, 49070, France"
@@ -19,24 +26,22 @@ struct CheckoutView: View {
     let taxesAndCharges = "₹ 136"
     let propertyCurrencyPrice = "€ 85.00"
     let totalPrice = "₹ 7,726"
-    
-    @State private var selectedPaymentMethod: String? = "Google Pay"
-    
+        
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 10) {
                 // Property Details
                 VStack(alignment: .leading) {
-                    Text(propertyName)
+                    Text(results.name)
                         .font(.title)
                         .fontWeight(.bold)
                     
-                    Text(propertyAddress)
+                    Text(results.address)
                         .font(.footnote)
                         .foregroundColor(.secondary)
                     
                     HStack {
-                        ForEach(0..<5) { _ in
+                        ForEach(0..<results.stars, id: \.self) { _ in
                             Image(systemName: "star.fill")
                                 .foregroundColor(.yellow)
                         }
@@ -50,8 +55,10 @@ struct CheckoutView: View {
                 HStack {
                     VStack(alignment: .leading) {
                         Text("From")
-                        Text(checkInDate)
-                            .fontWeight(.bold)
+//                        Text(startDate)
+//                            .fontWeight(.bold)
+//                        Text(startTime)
+//                            .fontWeight(.bold)
                     }
                     Spacer()
                     Divider()
@@ -59,8 +66,10 @@ struct CheckoutView: View {
                     Spacer()
                     VStack(alignment: .leading) {
                         Text("To")
-                        Text(checkOutDate)
-                            .fontWeight(.bold)
+//                        Text(endDate)
+//                            .fontWeight(.bold)
+//                        Text(endTime)
+//                            .fontWeight(.bold)
                     }
                 }
                 .padding([.leading, .trailing])
@@ -84,7 +93,7 @@ struct CheckoutView: View {
                         Text("Price")
                             .font(.title2)
                         Spacer()
-                        Text(price)
+                        Text(results.cost)
                             .font(.title2)
                             .fontWeight(.bold)
                     }
@@ -109,30 +118,18 @@ struct CheckoutView: View {
                                         .font(.headline)
                                         .padding(.bottom, 5)
                                     
-                                    PaymentMethodView(methodName: "Paytm UPI", selectedPaymentMethod: $selectedPaymentMethod)
-                                    PaymentMethodView(methodName: "Google Pay", selectedPaymentMethod: $selectedPaymentMethod)
+                                    PaymentMethodView(methodName: "Paytm UPI")
+                                    PaymentMethodView(methodName: "Google Pay")
                                     
-                                    if selectedPaymentMethod == "Google Pay" {
-                                        Button("PAY VIA GOOGLEPAY") {
-                                            // Implement the Google Pay action
-                                        }
-                                        .foregroundColor(.white)
-                                        .frame(maxWidth: .infinity)
-                                        .padding()
-                                        .background(Color.green)
-                                        .cornerRadius(10)
-                                        .padding(.horizontal)
-                                    }
-                                    
-                                    PaymentMethodView(methodName: "Pay on Delivery (Cash/UPI)", selectedPaymentMethod: $selectedPaymentMethod)
+                                    PaymentMethodView(methodName: "Pay on Delivery (Cash/UPI)")
                                     
                                     Text("Pay by any UPI App")
                                         .font(.headline)
                                         .padding(.top)
                                     
                                     VStack {
-                                        PaymentMethodView(methodName: "tejasragupathi@okhdfcbank", selectedPaymentMethod: $selectedPaymentMethod)
-                                        PaymentMethodView(methodName: "omvin@aubank", selectedPaymentMethod: $selectedPaymentMethod)
+                                        PaymentMethodView(methodName: "tejasragupathi@okhdfcbank")
+                                        PaymentMethodView(methodName: "omvin@aubank")
                                         
                                         Button("Add New UPI ID") {
                                             // Implement the Add New UPI action
@@ -178,15 +175,25 @@ struct CheckoutView: View {
             .navigationBarTitleDisplayMode(.inline)
         }
     }
-    private func selectPaymentMethod(_ method: String) {
-        selectedPaymentMethod = method
-    }
+}
+
+private func dateRangeString(from startDate: Date, to endDate: Date) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "d MMM" // e.g., 30 Nov
+    
+    let startDateString = dateFormatter.string(from: startDate)
+    let endDateString = dateFormatter.string(from: endDate)
+    
+    return "\(startDateString) - \(endDateString)"
+    
 }
     
     
 struct PaymentMethodView: View {
     var methodName: String
-    @Binding var selectedPaymentMethod: String?
+    
+    @State private var selectedPaymentMethod = ""
+
 
     var body: some View {
         HStack {
@@ -195,25 +202,41 @@ struct PaymentMethodView: View {
             Spacer()
             Image(systemName: selectedPaymentMethod == methodName ? "checkmark.circle.fill" : "circle")
                 .foregroundColor(selectedPaymentMethod == methodName ? .blue : .gray)
-                .onTapGesture {
-                    // This will set this method as the selected method
-                    selectedPaymentMethod = methodName
+            
+            if selectedPaymentMethod == methodName {
+                Button("Pay via \(selectedPaymentMethod)") {
+                    // Implement the Google Pay action
                 }
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(Color.green)
+                .cornerRadius(10)
+                .padding(.horizontal)
+            }
         }
         .padding()
         .background(RoundedRectangle(cornerRadius: 10).fill(Color(UIColor.systemGray6)))
-        .contentShape(Rectangle()) // Make the whole row tappable
+        .contentShape(Rectangle())
         .onTapGesture {
-            // This will set this method as the selected method
             selectedPaymentMethod = methodName
         }
     }
 }
 
 struct CheckoutView_Previews: PreviewProvider {
+    @State static var mockDestination: String = "Guduvancheri, India"
+    @State static var mockStartDate: Date = Date()
+    @State static var mockEndDate: Date = Date()
+    
     static var previews: some View {
         NavigationView {
-            CheckoutView()
+            CheckoutView(results: Results(img: "petimage-1",
+                                          name: "Rimi Lan",
+                                          stars: 5,
+                                          address: "123 anywhere st. any city state country 123",
+                                          cost: "150"),
+                         startDate: $mockStartDate, endDate: $mockEndDate, startTime: $mockStartDate, endTime: $mockEndDate)
         }
     }
 }

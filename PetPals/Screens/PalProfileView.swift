@@ -12,6 +12,8 @@ struct PalProfileView: View {
     
     @EnvironmentObject var userAuth: UserAuth
     
+    let results: Results
+    
     var palName: String
     
     var body: some View {
@@ -86,7 +88,7 @@ struct PalProfileView: View {
                         }
                         Spacer()
                         
-                        NavigationLink(destination: ConditionalView().environmentObject(userAuth)){
+                        NavigationLink(destination: RequestView(results: results).environmentObject(userAuth)){
                             Text("Book")
                                 .foregroundStyle(.white)
                                 .frame(width: 140,height: 40)
@@ -102,8 +104,20 @@ struct PalProfileView: View {
     }
 }
 
-#Preview {
-    PalProfileView(palName: "palName")
-        .environmentObject(UserAuth())
-
+struct PalProfileView_Previews: PreviewProvider {
+    @State static var mockDestination: String = "Guduvancheri, India"
+    @State static var mockStartDate: Date = Date()
+    @State static var mockEndDate: Date = Date()
+    
+    static var previews: some View {
+        
+        PalProfileView(results: Results(img: "petimage-1",
+                                                            name: "Rimi Lan",
+                                                            stars: 5,
+                                                            address: "123 anywhere st. any city state country 123",
+                                                            cost: "150"),
+                                           palName: "palName")
+            .environmentObject(UserAuth())
+        
+    }
 }
