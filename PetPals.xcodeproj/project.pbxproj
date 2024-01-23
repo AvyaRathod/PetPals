@@ -36,6 +36,7 @@
 		419369672B2D03E300E8694E /* PetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419369662B2D03E300E8694E /* PetView.swift */; };
 		419369692B2DD77200E8694E /* RequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419369682B2DD77200E8694E /* RequestView.swift */; };
 		41A2595F2B59836000097E06 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A2595E2B59836000097E06 /* RadioButton.swift */; };
+		41A259612B5B07B200097E06 /* BookingConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A259602B5B07B200097E06 /* BookingConfirmationView.swift */; };
 		41E64B962B33531D00D1B25E /* ServicePlacardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E64B952B33531D00D1B25E /* ServicePlacardView.swift */; };
 		41E64B982B3375C300D1B25E /* JobsServicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E64B972B3375C300D1B25E /* JobsServicesView.swift */; };
 		41F6F1522B30D2D4003069EC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F6F1512B30D2D4003069EC /* LoginView.swift */; };
@@ -91,6 +92,7 @@
 		419369662B2D03E300E8694E /* PetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetView.swift; sourceTree = "<group>"; };
 		419369682B2DD77200E8694E /* RequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestView.swift; sourceTree = "<group>"; };
 		41A2595E2B59836000097E06 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
+		41A259602B5B07B200097E06 /* BookingConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingConfirmationView.swift; sourceTree = "<group>"; };
 		41E64B952B33531D00D1B25E /* ServicePlacardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicePlacardView.swift; sourceTree = "<group>"; };
 		41E64B972B3375C300D1B25E /* JobsServicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobsServicesView.swift; sourceTree = "<group>"; };
 		41F6F1512B30D2D4003069EC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -202,7 +204,6 @@
 				419369622B2C783E00E8694E /* PalsNearbyView.swift */,
 				419369682B2DD77200E8694E /* RequestView.swift */,
 				418035B92B3AC2A50083B804 /* ResultsView.swift */,
-				4159BAC02B5025E4003BFB2E /* CheckoutView.swift */,
 				415BDC3D2B31DA9A00103E59 /* ChatView.swift */,
 				415BDC3F2B31DC2800103E59 /* MessageView.swift */,
 				41F6F1512B30D2D4003069EC /* LoginView.swift */,
@@ -214,6 +215,8 @@
 				41E64B972B3375C300D1B25E /* JobsServicesView.swift */,
 				0F2C79EB2B441365008042AF /* ListingView.swift */,
 				0F2C79ED2B44535F008042AF /* FavPalView.swift */,
+				4159BAC02B5025E4003BFB2E /* CheckoutView.swift */,
+				41A259602B5B07B200097E06 /* BookingConfirmationView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -366,6 +369,7 @@
 				415043192B23BD8500359C47 /* HomeView.swift in Sources */,
 				418035B82B39F8060083B804 /* BookingPlacard.swift in Sources */,
 				41E64B962B33531D00D1B25E /* ServicePlacardView.swift in Sources */,
+				41A259612B5B07B200097E06 /* BookingConfirmationView.swift in Sources */,
 				0F2C79EC2B441365008042AF /* ListingView.swift in Sources */,
 				418035BA2B3AC2A50083B804 /* ResultsView.swift in Sources */,
 				4184F24C2B2362E50091747C /* PetPalsApp.swift in Sources */,

@@ -15,8 +15,9 @@ struct AboutMeView: View {
     @State var Skills = ""
     @State var Qualifications = ""
     
+    @EnvironmentObject var serviceProvider: ServiceProvider
+    
     var body: some View {
-        NavigationView{
             VStack{
                 Form{
                     Section(header: Text("Introduce yourself and why you enjoy being with with pets ?").bold()){
@@ -37,21 +38,25 @@ struct AboutMeView: View {
                         TextField("e.g. Tell us about your other experience in training, grooming etc .",text: $Qualifications)
                     }
                 }
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                    Text("Save")
-                        .frame(width: 380,
-                               height: 50,
-                               alignment: .center)
-                        .background(Color.appBrown)
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
-                })
+                NavigationLink(destination:HomeView()){
+                    Button(action: {
+                        serviceProvider.isServiceProvider=true
+                    }, label: {
+                        Text("Save")
+                            .frame(width: 380,
+                                   height: 50,
+                                   alignment: .center)
+                            .background(Color.appBrown)
+                            .foregroundColor(.white)
+                            .cornerRadius(8)
+                    })
+                }
             }
             .navigationTitle("About Me")
-        }
     }
 }
 
 #Preview {
     AboutMeView(service: Service(img: "pawprint", title: "Pet Boarding", description: "Perfect if the pet needs overnight pet care"))
+        .environmentObject(ServiceProvider())
 }

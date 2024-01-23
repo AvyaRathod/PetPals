@@ -130,6 +130,7 @@ struct HomeView: View {
                 Image(systemName: "person.crop.circle")
                     .accentColor(Color.black)
             })
+            .navigationBarBackButtonHidden(true)
         }
     }
 

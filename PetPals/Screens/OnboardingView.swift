@@ -18,6 +18,7 @@ struct OnboardingView: View {
                 Spacer()
                 Button("Skip") {
                     isOnboardingCompleted = true
+                    UserDefaults.standard.set(true, forKey: "isOnboardingCompleted")
                 }
                 .padding()
             }
@@ -56,6 +57,7 @@ struct OnboardingView: View {
                         }
                     } else {
                         isOnboardingCompleted = true
+                        UserDefaults.standard.set(true, forKey: "isOnboardingCompleted")
                     }
                 }) {
                     Image(systemName: currentPage < 2 ? "arrow.right" : "checkmark")
