@@ -31,12 +31,21 @@ class ServiceProvider: ObservableObject {
     }
 }
 
-
+class BookingManager: ObservableObject {
+    @Published var bookings: [Booking] = []
+    
+    func addBooking(serviceProviderID:UUID, serviceProviderName: String, serviceProviderAddr: String, bookingCost: String, startDate: Date, endDate: Date, startTime: Date, endTime: Date, selectedPets: Set<String>, selectedService: String, status: BookingStatus, paymentStatus: PaymentStatus) {
+        let newBooking = Booking(serviceProviderID: serviceProviderID, serviceProviderName: serviceProviderName, serviceProviderAddr: serviceProviderAddr, bookingCost: bookingCost, startDate: startDate, endDate: endDate, startTime: startTime, endTime: endTime, selectedPets: selectedPets, selectedService: selectedService, status: status, paymentStatus: paymentStatus)
+        bookings.append(newBooking)
+        print("booking added")
+    }
+}
 
 @main
 struct PetPalsApp: App {
     @StateObject var userAuth = UserAuth()
     @StateObject var serviceProvider = ServiceProvider()
+    @StateObject var userBooking = BookingManager()
 
     @AppStorage("isOnboardingCompleted") var isOnboardingCompleted: Bool = UserDefaults.standard.bool(forKey: "isOnboardingCompleted")
     
@@ -61,6 +70,7 @@ struct PetPalsApp: App {
                 MainTabView()
                     .environmentObject(userAuth)
                     .environmentObject(serviceProvider)
+                    .environmentObject(userBooking)
             } else {
                 OnboardingView(isOnboardingCompleted: $isOnboardingCompleted)
             }
