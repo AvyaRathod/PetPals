@@ -15,20 +15,16 @@ struct CheckoutView: View {
     @Binding var endDate: Date
     @Binding var startTime: Date
     @Binding var endTime: Date
+    @Binding var selectedPets: Set<String>
+    @Binding var selectedService: String
     
     @State private var selectedPaymentMethod: String?
     
-    let propertyName = "Grand Mainguet"
-    let propertyRating = 9.0
-    let propertyAddress = "Le Grand Mainguet, Saint-Lambert-la-Potherie, 49070, France"
-    let checkInDate = "Fri, 12 Jan 2024"
-    let checkOutDate = "Sat, 13 Jan 2024"
-    let guests = "2 adults"
-    let price = "₹ 7,725.66"
-    let taxesAndCharges = "₹ 136"
-    let propertyCurrencyPrice = "€ 85.00"
-    let totalPrice = "₹ 7,726"
-        
+    var PrefPaymentOpt = ["Paytm UPI", "Google Pay" , "Pay at the end(Cash/UPI)"]
+    var otherPaymentOpt = ["asdf@okhdfcbank", "omvin@aubank"]
+    
+    @EnvironmentObject var userBooking: BookingManager
+
     var body: some View {
         VStack{
             ScrollView {
@@ -46,7 +42,7 @@ struct CheckoutView: View {
                                 .foregroundColor(.secondary)
                             
                             HStack {
-                                ForEach(0..<results.stars, id: \.self) { _ in
+                                ForEach(0..<results.stars!, id: \.self) { _ in
                                     Image(systemName: "star.fill")
                                         .foregroundColor(.yellow)
                                 }
@@ -59,10 +55,10 @@ struct CheckoutView: View {
                         HStack {
                             VStack(alignment: .leading) {
                                 Text("From")
-                                //                        Text(startDate)
-                                //                            .fontWeight(.bold)
-                                //                        Text(startTime)
-                                //                            .fontWeight(.bold)
+                                Text(startDate, style: .date)
+                                    .fontWeight(.bold)
+                                Text(startTime, style: .time)
+                                    .fontWeight(.bold)
                             }
                             Spacer()
                             Divider()
@@ -70,10 +66,10 @@ struct CheckoutView: View {
                             Spacer()
                             VStack(alignment: .leading) {
                                 Text("To")
-                                //                        Text(endDate)
-                                //                            .fontWeight(.bold)
-                                //                        Text(endTime)
-                                //                            .fontWeight(.bold)
+                                Text(endDate, style: .date)
+                                    .fontWeight(.bold)
+                                Text(endTime, style: .time)
+                                    .fontWeight(.bold)
                             }
                         }
                         .padding([.leading, .trailing])
@@ -83,7 +79,7 @@ struct CheckoutView: View {
                         HStack {
                             Text("Pets")
                             Spacer()
-                            Text("pet names")
+                            Text(selectedPets.joined(separator: ", "))
                                 .fontWeight(.bold)
                         }
                         .padding([.leading, .trailing, .top])
@@ -106,7 +102,7 @@ struct CheckoutView: View {
                                 Text("Taxes")
                                     .foregroundColor(.secondary)
                                 Spacer()
-                                Text(taxesAndCharges)
+                                Text("₹ 136")
                                     .foregroundColor(.secondary)
                             }
                             .padding([.leading, .trailing])
@@ -126,18 +122,30 @@ struct CheckoutView: View {
                             .font(.headline)
                             .padding(.bottom, 5)
                         
-                        PaymentMethodView(methodName: "Paytm UPI", selectedPaymentMethod: $selectedPaymentMethod)
-                        PaymentMethodView(methodName: "Google Pay", selectedPaymentMethod: $selectedPaymentMethod)
-                        
-                        PaymentMethodView(methodName: "Pay on Delivery (Cash/UPI)", selectedPaymentMethod: $selectedPaymentMethod)
+                        ForEach(PrefPaymentOpt, id: \.self) { paymentOption in
+                                            PaymentMethodView(methodName: paymentOption, selectedPaymentMethod: $selectedPaymentMethod, results: results,
+                                                              startDate: $startDate,
+                                                              endDate: $endDate,
+                                                              startTime: $startTime,
+                                                              endTime: $endTime,
+                                                              selectedPets:$selectedPets,
+                                                              selectedService:$selectedService).environmentObject(userBooking)
+                                        }
                         
                         Text("Pay by any UPI App")
                             .font(.headline)
                             .padding(.top)
                         
                         VStack {
-                            PaymentMethodView(methodName: "tejasragupathi@okhdfcbank", selectedPaymentMethod: $selectedPaymentMethod)
-                            PaymentMethodView(methodName: "omvin@aubank", selectedPaymentMethod: $selectedPaymentMethod)
+                            ForEach(otherPaymentOpt, id: \.self) { paymentOption in
+                                                PaymentMethodView(methodName: paymentOption, selectedPaymentMethod: $selectedPaymentMethod, results: results,
+                                                                  startDate: $startDate,
+                                                                  endDate: $endDate,
+                                                                  startTime: $startTime,
+                                                                  endTime: $endTime,
+                                                                  selectedPets:$selectedPets,
+                                                                  selectedService:$selectedService)
+                                            }
                             
                             Button("Add New UPI ID") {
                                 // Implement the Add New UPI action
@@ -150,18 +158,15 @@ struct CheckoutView: View {
                     
                 }
             }
-            VStack(alignment: .leading) {
-                Divider()
-                HStack {
-                    Text(totalPrice)
-                        .font(.title)
-                        .fontWeight(.bold)
-                    Spacer()
-                    Text(taxesAndCharges)
-                        .foregroundColor(.secondary)
-                }
-                .padding([.leading, .trailing, .top])
-            }
+//            VStack(alignment: .leading) {
+//                Divider()
+//                HStack {
+//                    Text(results.cost)
+//                        .font(.title)
+//                        .fontWeight(.bold)
+//                }
+//                .padding([.leading, .trailing, .top])
+//            }
         }
         .navigationTitle("Final Step")
         .navigationBarTitleDisplayMode(.inline)
@@ -172,8 +177,20 @@ struct PaymentMethodView: View {
     var methodName: String
     @Binding var selectedPaymentMethod: String?
     
+    let results: Results
+    
+    @Binding var startDate: Date
+    @Binding var endDate: Date
+    @Binding var startTime: Date
+    @Binding var endTime: Date
+    @Binding var selectedPets: Set<String>
+    @Binding var selectedService: String
+    @EnvironmentObject var bookingManager: BookingManager
+
+    @State private var navigateToConfirmation = false
+
     var body: some View {
-        VStack{
+        VStack {
             HStack {
                 Text(methodName)
                     .fontWeight(.medium)
@@ -181,27 +198,63 @@ struct PaymentMethodView: View {
                 Image(systemName: selectedPaymentMethod == methodName ? "checkmark.circle.fill" : "circle")
                     .foregroundColor(selectedPaymentMethod == methodName ? .blue : .gray)
             }
-            
+
             if selectedPaymentMethod == methodName {
-                NavigationLink(destination:BookingConfirmationView()){
+                Button(action: {
+                    if methodName == "Pay on Delivery (Cash/UPI)" {
+                        bookingManager.addBooking(serviceProviderID: results.id,
+                                                  serviceProviderName: results.name,
+                                                  serviceProviderAddr: results.address,
+                                                  bookingCost: results.cost,
+                                                  startDate: startDate,
+                                                  endDate: endDate,
+                                                  startTime: startTime,
+                                                  endTime: endTime,
+                                                  selectedPets: selectedPets,
+                                                  selectedService: selectedService,
+                                                  status: .confirmed,
+                                                  paymentStatus: .payOnDelivery)
+                    } else {
+                        bookingManager.addBooking(serviceProviderID: results.id,
+                                                  serviceProviderName: results.name,
+                                                  serviceProviderAddr: results.address,
+                                                  bookingCost: results.cost,
+                                                  startDate: startDate,
+                                                  endDate: endDate,
+                                                  startTime: startTime,
+                                                  endTime: endTime,
+                                                  selectedPets: selectedPets,
+                                                  selectedService: selectedService,
+                                                  status: .confirmed,
+                                                  paymentStatus: .paid)
+                    }
+                    navigateToConfirmation = true
+                }) {
                     Text("Pay via \(methodName)")
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.green)
+                        .cornerRadius(10)
                 }
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity)
-                .padding()
-                .background(Color.green)
-                .cornerRadius(10)
                 .padding(.horizontal)
             }
-            
         }
         .padding()
         .background(RoundedRectangle(cornerRadius: 10).fill(Color(UIColor.systemGray6)))
         .onTapGesture {
             self.selectedPaymentMethod = methodName
         }
+        .navigationDestination(isPresented: $navigateToConfirmation) {
+            BookingConfirmationView(results: results,
+                                    startDate: $startDate,
+                                    endDate: $endDate,
+                                    startTime: $startTime,
+                                    endTime: $endTime,
+                                    selectedPets: $selectedPets,
+                                    selectedService: $selectedService)
+        }
     }
-    
 }
 
 
@@ -209,6 +262,8 @@ struct CheckoutView_Previews: PreviewProvider {
     @State static var mockDestination: String = "Guduvancheri, India"
     @State static var mockStartDate: Date = Date()
     @State static var mockEndDate: Date = Date()
+    @State static var selectedService = "walking"
+    @State static var selectedPets:Set<String> = ["Tuffy", "Jerry", "Max", "Buddy"]
     
     static var previews: some View {
         NavigationView {
@@ -217,7 +272,11 @@ struct CheckoutView_Previews: PreviewProvider {
                                           stars: 5,
                                           address: "123 anywhere st. any city state country 123",
                                           cost: "150"),
-                         startDate: $mockStartDate, endDate: $mockEndDate, startTime: $mockStartDate, endTime: $mockEndDate)
+                         startDate: $mockStartDate, endDate: $mockEndDate, startTime: $mockStartDate, endTime: $mockEndDate,
+                         selectedPets:$selectedPets,
+                         selectedService:$selectedService)
+            .environmentObject(BookingManager())
+
         }
     }
 }

@@ -11,7 +11,8 @@ import MapKit
 struct PalProfileView: View {
     
     @EnvironmentObject var userAuth: UserAuth
-    
+    @EnvironmentObject var userBooking: BookingManager
+
     let results: Results
     
     var palName: String
@@ -88,7 +89,8 @@ struct PalProfileView: View {
                         }
                         Spacer()
                         
-                        NavigationLink(destination: RequestView(results: results).environmentObject(userAuth)){
+                        NavigationLink(destination: RequestView(results: results).environmentObject(userAuth)
+                            .environmentObject(userBooking)){
                             Text("Book")
                                 .foregroundStyle(.white)
                                 .frame(width: 140,height: 40)

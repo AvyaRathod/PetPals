@@ -20,6 +20,8 @@ struct LoginView: View {
     @Binding var endDate: Date
     @Binding var startTime: Date
     @Binding var endTime: Date
+    @Binding var selectedPets: Set<String>
+    @Binding var selectedService: String
     
     var body: some View {
         NavigationStack {
@@ -112,7 +114,9 @@ struct LoginView: View {
                                  startDate: $startDate,
                                  endDate: $endDate,
                                  startTime: $startTime,
-                                 endTime: $endTime)
+                                 endTime: $endTime,
+                                 selectedPets:$selectedPets,
+                                 selectedService:$selectedService)
                 }
             }
         }
@@ -126,6 +130,8 @@ struct LoginView_Previews: PreviewProvider {
     @State static var mockDestination: String = "Guduvancheri, India"
     @State static var mockStartDate: Date = Date()
     @State static var mockEndDate: Date = Date()
+    @State static var selectedService = "walking"
+    @State static var selectedPets:Set<String> = ["Tuffy", "Jerry", "Max", "Buddy"]
     
     static var previews: some View {
         LoginView(results: Results(img: "petimage-1",
@@ -133,7 +139,9 @@ struct LoginView_Previews: PreviewProvider {
                                    stars: 5,
                                    address: "123 anywhere st. any city state country 123",
                                    cost: "150"),
-                  startDate: $mockStartDate, endDate: $mockEndDate, startTime: $mockStartDate, endTime: $mockEndDate)
+                  startDate: $mockStartDate, endDate: $mockEndDate, startTime: $mockStartDate, endTime: $mockEndDate,
+        selectedPets: $selectedPets,
+        selectedService: $selectedService)
         .environmentObject(UserAuth())
         
     }

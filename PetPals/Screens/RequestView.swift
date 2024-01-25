@@ -20,7 +20,8 @@ struct RequestView: View {
     let services = ["daycare", "dayboarding", "sitting", "walking"]
     let pets = ["Tuffy", "Jerry", "Max", "Buddy"]
     @EnvironmentObject var userAuth: UserAuth
-    
+    @EnvironmentObject var userBooking: BookingManager
+
     @State private var selectedPets: Set<String> = []
     @State private var selectedService = ""
     @State private var destination = ""
@@ -142,7 +143,11 @@ struct RequestView: View {
                                                         startDate: $startDate,
                                                         endDate: $endDate,
                                                         startTime: $startTime,
-                                                        endTime: $endTime).environmentObject(userAuth)) {                                            Text("Book")
+                                                        endTime: $endTime,
+                                                        selectedPets:$selectedPets,
+                                                        selectedService:$selectedService).environmentObject(userAuth)
+                .environmentObject(userBooking)) {
+                Text("Book")
                     .foregroundColor(.white)
                     .padding()
                     .frame(width: 363)
@@ -195,12 +200,15 @@ struct CollapsedPickerView: View{
 
 struct ConditionalView: View {
     @EnvironmentObject var userAuth: UserAuth
+    @EnvironmentObject var userBooking: BookingManager
     
     let results: Results
     @Binding var startDate: Date
     @Binding var endDate: Date
     @Binding var startTime: Date
     @Binding var endTime: Date
+    @Binding var selectedPets: Set<String>
+    @Binding var selectedService: String
     
     var body: some View {
         Group {
@@ -209,13 +217,17 @@ struct ConditionalView: View {
                              startDate: $startDate,
                              endDate: $endDate,
                              startTime: $startTime,
-                             endTime: $endTime)
+                             endTime: $endTime,
+                             selectedPets:$selectedPets,
+                             selectedService:$selectedService).environmentObject(userBooking)
             } else {
                 LoginView(results: results,
                           startDate: $startDate,
                           endDate: $endDate,
                           startTime: $startTime,
-                          endTime: $endTime)
+                          endTime: $endTime,
+                          selectedPets:$selectedPets,
+                          selectedService:$selectedService)
             }
         }
     }

@@ -9,9 +9,9 @@ import SwiftUI
 
 struct Results: Identifiable {
     let id = UUID()
-    let img: String
+    let img: String?
     let name: String
-    let stars: Int
+    let stars: Int?
     let address: String
     let cost: String
 }
@@ -19,11 +19,12 @@ struct Results: Identifiable {
 struct BookingPlacard: View {
     let results: Results
 
-    
+    @EnvironmentObject var userBooking: BookingManager
+
     @State private var isFavorite: Bool = false
     
     var body: some View {
-        NavigationLink(destination: PalProfileView(results: results,palName: results.name)) {
+        NavigationLink(destination: PalProfileView(results: results,palName: results.name).environmentObject(userBooking)) {
             ZStack(alignment: .topTrailing) {
                 RoundedRectangle(cornerRadius: 20)
                     .fill(Color.white)
@@ -31,7 +32,7 @@ struct BookingPlacard: View {
                     .overlay(
                         VStack {
                             HStack {
-                                Image(results.img)
+                                Image(results.img!)
                                     .resizable()
                                     .scaledToFill()
                                     .frame(width: 112, height: 144)
@@ -46,7 +47,7 @@ struct BookingPlacard: View {
                                             .foregroundColor(.black)
                                         
                                         HStack {
-                                            ForEach(0..<results.stars, id: \.self) { _ in
+                                            ForEach(0..<results.stars!, id: \.self) { _ in
                                                 Image(systemName: "star.fill")
                                                     .foregroundColor(.yellow)
                                                     .frame(width: 12.0)
