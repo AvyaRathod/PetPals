@@ -1,10 +1,3 @@
-//
-//  ListingView.swift
-//  PetPals
-//
-//  Created by user2 on 02/01/24.
-//
-
 import SwiftUI
 
 struct ListingView: View {
