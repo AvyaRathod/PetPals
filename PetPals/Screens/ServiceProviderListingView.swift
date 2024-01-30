@@ -154,7 +154,7 @@ struct ServiceProviderListingView: View {
                             Text("Book")
                                 .foregroundStyle(.white)
                                 .frame(width: 140,height: 40)
-                                .background(.appYellow)
+                                .background(Color("Cinnamon"))
                                 .clipShape(RoundedRectangle(cornerRadius: 8))
                         }
                 }

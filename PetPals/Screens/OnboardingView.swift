@@ -19,11 +19,11 @@ struct OnboardingView: View {
                 .font(.largeTitle)
             
             TabView(selection: $currentPage) {
-                SplashScreenView(text: "Perfect if the pet needs overnight pet care", imageName: "p14", currentPage: $currentPage)
+                SplashScreenView(text: "Simply book a pal to look after your pet at your own home",text2: "", imageName: "p14", currentPage: $currentPage)
                     .tag(0)
-                SplashScreenView(text: "For dogs that need a walk or two", imageName: "p15", currentPage: $currentPage)
+                SplashScreenView(text: "Seamlessly book our pals to walk your pet",text2: "" , imageName: "p15", currentPage: $currentPage)
                     .tag(1)
-                SplashScreenView(text: "Perfect if the pet needs       overnight pet care", imageName: "p16", currentPage: $currentPage)
+                SplashScreenView(text: "Seamlessly book overnight stays for your pet",text2: "", imageName: "p16", currentPage: $currentPage)
                     .tag(2)
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
@@ -50,7 +50,7 @@ struct OnboardingView: View {
                 }) {
                     Text("Skip")
                         .padding()
-                        .background(Circle().fill(Color.orange))
+                        .background(Circle().fill(Color("Cinnamon")))
                         .foregroundColor(.white)
                 }
                 .padding(.trailing)
@@ -63,6 +63,7 @@ struct OnboardingView: View {
 
 struct SplashScreenView: View {
     let text: String
+    let text2: String
     let imageName: String
     @Binding var currentPage: Int
     var body: some View {
@@ -76,8 +77,13 @@ struct SplashScreenView: View {
             // Text content of the splash screen
             Text(text)
                 .font(.title)
-                .padding()
                 .multilineTextAlignment(.center)
+                .padding(.horizontal)
+            
+            Text(text2)
+                .font(.callout)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal)
         }
     }
 }

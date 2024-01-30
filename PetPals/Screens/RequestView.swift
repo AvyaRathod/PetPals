@@ -154,7 +154,7 @@ struct RequestView: View {
                         .foregroundColor(.white)
                         .padding()
                         .frame(width: 363)
-                        .background(isFormValid ? Color.appYellow : Color.gray)
+                        .background(isFormValid ? Color.cinnamon : Color.gray)
                         .cornerRadius(8)
                 }
                 .disabled(!isFormValid)

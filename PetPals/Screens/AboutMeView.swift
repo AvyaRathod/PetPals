@@ -42,7 +42,7 @@ struct AboutMeView: View {
                 }, label: {
                     Text("Save")
                         .frame(width: 380, height: 50)
-                        .background(Color.appBrown)
+                        .background(Color.green)
                         .foregroundColor(.white)
                         .cornerRadius(8)
                 })

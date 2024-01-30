@@ -34,7 +34,7 @@ struct becomeASitterBanner: View {
                         .foregroundColor(.white)
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .background(Color.appYellow)
+                        .background(Color("Cinnamon"))
                         .cornerRadius(10)
                 }
             }

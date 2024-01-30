@@ -32,10 +32,10 @@ struct HomeView: View {
                     .padding(.leading)
                 
                 HStack {
-                    ServiceView(serviceName: "Boarding")
-                    ServiceView(serviceName: "Daycare")
-                    ServiceView(serviceName: "Sitting")
-                    ServiceView(serviceName: "Walking")
+                    ServiceView(serviceName: "Boarding", serviceImage: "p16")
+                    ServiceView(serviceName: "Daycare", serviceImage: "p14")
+                    ServiceView(serviceName: "Sitting", serviceImage: "p17")
+                    ServiceView(serviceName: "Walking", serviceImage: "p15")
                 }
                 // My bookings
                 if userBooking.bookings.count > 0 {
@@ -58,7 +58,7 @@ struct HomeView: View {
                                 }
                                 .padding(6.0)
                             }
-                            .background(Color("app_yellow"))
+                            .background(Color("Cinnamon"))
                             .cornerRadius(15)
                         }
                     }
@@ -167,7 +167,7 @@ struct HomeView: View {
                         }
                         .padding(6.0)
                     }
-                    .background(Color("app_yellow"))
+                    .background(Color("Cinnamon"))
                     .cornerRadius(15)
                 }
                 .padding(.horizontal)
@@ -203,7 +203,7 @@ struct HomeView: View {
                             Label("Filter", systemImage: "line.horizontal.3.decrease.circle")
                                 .padding(.horizontal)
                                 .padding(.vertical, 5)
-                                .background(Color("app_yellow"))
+                                .background(Color("Cinnamon"))
                                 .foregroundColor(.white)
                                 .cornerRadius(15)
                         }
@@ -215,7 +215,7 @@ struct HomeView: View {
                             Label("Sort", systemImage: "arrow.up.arrow.down")
                                 .padding(.horizontal)
                                 .padding(.vertical, 5)
-                                .background(Color("app_yellow"))
+                                .background(Color("Cinnamon"))
                                 .foregroundColor(.white)
                                 .cornerRadius(15)
                         }
@@ -248,14 +248,17 @@ struct HomeView: View {
 
 struct ServiceView: View {
     var serviceName: String
-    
+    var serviceImage: String
     var body: some View {
         NavigationLink(destination: PalsNearbyView(serviceName: serviceName)) {
             VStack {
                 // Service Image Placeholder
-                RoundedRectangle(cornerRadius: 800)
+                Image(serviceImage)
+                
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
                     .frame(width: 65, height: 65)
-                    .foregroundColor(.gray)
+                    .clipShape(Circle())
                 
                 Text(serviceName)
                     .font(.subheadline)
