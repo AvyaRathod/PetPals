@@ -10,14 +10,14 @@ import SwiftUI
 struct PalsNearbyView: View {
     var serviceName: String
     
-    let pals: [Pal] = [
-        Pal(name: "Jack Bird", pets: "Dogs, Cats", userimage:  "p1"),
-        Pal(name: "Rimi Lan", pets: "Dogs, Cats", userimage:  "p2"),
-        Pal(name: "iock Bird", pets: "Dogs, Cats", userimage:  "p3"),
-        Pal(name: "Rdemi Lan", pets: "Dogs, Cats", userimage:  "p4"),
-        Pal(name: "Jacrk Bird", pets: "Dogs, Cats", userimage:  "p5"),
-        Pal(name: "Rimie Lan", pets: "Dogs, Cats", userimage:  "p11"),
-        Pal(name: "Jack wBird", pets: "Dogs, Cats", userimage:  "p12"),
+    let pals: [Pals] = [
+        Pals(name: "Jack Bird", pets: "Dogs, Cats", userimage:  "p1"),
+        Pals(name: "Rimi Lan", pets: "Dogs, Cats", userimage:  "p2"),
+        Pals(name: "iock Bird", pets: "Dogs, Cats", userimage:  "p3"),
+        Pals(name: "Rdemi Lan", pets: "Dogs, Cats", userimage:  "p4"),
+        Pals(name: "Jacrk Bird", pets: "Dogs, Cats", userimage:  "p5"),
+        Pals(name: "Rimie Lan", pets: "Dogs, Cats", userimage:  "p11"),
+        Pals(name: "Jack wBird", pets: "Dogs, Cats", userimage:  "p12"),
         // ... more pals
     ]
     
@@ -67,7 +67,7 @@ struct PalsNearbyView: View {
     }
 }
 
-struct Pal: Identifiable {
+struct Pals: Identifiable {
     let id = UUID()
     let name: String
     let pets: String

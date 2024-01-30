@@ -76,7 +76,7 @@ struct UserProfileView: View {
                                     
                                     Spacer()
                                     
-                                    NavigationLink(destination:JobsServicesView()){
+                                    NavigationLink(destination:OnboardingQuestionnaireView()){
                                         Text("Register Now")
                                             .foregroundStyle(.white)
                                             .frame(width: 110,height: 40)

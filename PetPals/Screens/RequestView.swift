@@ -5,7 +5,10 @@
 //  Created by Avya Rathod on 16/12/23.
 //
 
+// to do: add validation for the date time. also according to the type of service, there should be different date time pickers
+
 import SwiftUI
+import MapKit
 
 enum SearchOptions{
     case location
@@ -14,21 +17,24 @@ enum SearchOptions{
 }
 
 struct RequestView: View {
-    let results: Results
+    let results: Pal
     
     @State private var selectedOption: SearchOptions = .location
     let services = ["daycare", "dayboarding", "sitting", "walking"]
     let pets = ["Tuffy", "Jerry", "Max", "Buddy"]
     @EnvironmentObject var userAuth: UserAuth
     @EnvironmentObject var userBooking: BookingManager
-
+    
     @State private var selectedPets: Set<String> = []
     @State private var selectedService = ""
-    @State private var destination = ""
     @State private var startDate = Date()
     @State private var endDate = Date()
     @State private var startTime = Date()
     @State private var endTime = Date()
+    
+    var isFormValid: Bool {
+        !selectedService.isEmpty && !selectedPets.isEmpty
+    }
     
     let columns: [GridItem] = [
         GridItem(.flexible(), spacing: -20),
@@ -135,25 +141,24 @@ struct RequestView: View {
                 withAnimation(.snappy) { selectedOption = .pets }
             }
             
-            NavigationLink(destination: ConditionalView(results: Results(img: results.img,
-                                                                         name: results.name,
-                                                                         stars: results.stars,
-                                                                         address: results.address,
-                                                                         cost: results.cost),
+            NavigationLink(destination: ConditionalView(results: results,
                                                         startDate: $startDate,
                                                         endDate: $endDate,
                                                         startTime: $startTime,
                                                         endTime: $endTime,
-                                                        selectedPets:$selectedPets,
-                                                        selectedService:$selectedService).environmentObject(userAuth)
+                                                        selectedPets: $selectedPets,
+                                                        selectedService: $selectedService)
+                .environmentObject(userAuth)
                 .environmentObject(userBooking)) {
-                Text("Book")
-                    .foregroundColor(.white)
-                    .padding()
-                    .frame(width: 363)
-                    .background(Color.appYellow)
-                    .cornerRadius(8)
-            }
+                    Text("Book")
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(width: 363)
+                        .background(isFormValid ? Color.appYellow : Color.gray)
+                        .cornerRadius(8)
+                }
+                .disabled(!isFormValid)
+            
             Spacer()
         }
         .offset(y:-60)
@@ -202,7 +207,7 @@ struct ConditionalView: View {
     @EnvironmentObject var userAuth: UserAuth
     @EnvironmentObject var userBooking: BookingManager
     
-    let results: Results
+    let results: Pal
     @Binding var startDate: Date
     @Binding var endDate: Date
     @Binding var startTime: Date
@@ -236,11 +241,32 @@ struct ConditionalView: View {
 struct RequestView_Previews: PreviewProvider {
     
     static var previews: some View {
-        RequestView(results: Results(img: "petimage-1",
-                                     name: "Rimi Lan",
-                                     stars: 5,
-                                     address: "123 anywhere st. any city state country 123",
-                                     cost: "150"))
+        RequestView(results: Pal(
+            name: "Alice Johnson",
+            profileImage: "petimage-1",
+            rating: 4,
+            address: "123 anywhere st. any city state country 123",
+            summary: "I love spending time with furry friends and have a spacious backyard for them to play.",
+            servicesOffered: [
+                ServicesOffered(name: .dayboarding, description: "Overnight care for your pet", price: "INR 150/Night"),
+                ServicesOffered(name: .daycare, description: "Daytime care", price: "INR 100/Day")
+            ],
+            acceptedPets: ["Cats", "Dogs"],
+            neighborhoodLocation: CLLocationCoordinate2D(latitude: 12.9716, longitude: 77.5946),
+            reviews: [
+                Review(review: "Alice was wonderful with my Max!", rating: 5, username: "John Doe", profileImage: "profilepic-1"),
+                Review(review: "Very caring and attentive.", rating: 4, username: "Emma Stone", profileImage: "profilepic-2"),
+                Review(review: "Best pet sitter in town!", rating: 5, username: "Mike Ross", profileImage: "profilepic-3"),
+                Review(review: "Highly recommend Alice for pet sitting.", rating: 4, username: "Sarah Connor", profileImage: "profilepic-4")
+            ],
+            contactInfo: ContactInformation(
+                phoneNumber: "1234567890",
+                instagramHandle: "@alicepets",
+                whatsappNumber: "9876543210"
+            )
+        ))
         .environmentObject(UserAuth())
+        .environmentObject(BookingManager())
+        
     }
 }
