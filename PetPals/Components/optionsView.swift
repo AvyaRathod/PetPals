@@ -11,7 +11,6 @@ struct OptionsContainerView: View {
         .padding()
         .background(RoundedRectangle(cornerRadius: 15)
                         .fill(Color.white)
-                        .shadow(radius: 5)
         )
     }
 }
@@ -42,7 +41,7 @@ struct OptionsView: View {
                             RoundedRectangle(cornerRadius: 12)
                                 .stroke(Color.white, lineWidth: 1)
                         )
-                        .padding(.horizontal)
+                        
         )
     }
 }

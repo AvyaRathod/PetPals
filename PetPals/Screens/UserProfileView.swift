@@ -17,7 +17,7 @@ struct UserProfileView: View {
             ScrollView{
                 ZStack(){
                     RoundedRectangle(cornerRadius: 25, style: .continuous)
-                        .fill(Color.yellow.opacity(0.8)) // Use the color you want for the rounded rectangle
+                        .fill(Color("Cinnamon")) // Use the color you want for the rounded rectangle
                         .frame(height: 220) // Set the height you want for the rounded rectangle
                     
                     VStack{
@@ -49,49 +49,38 @@ struct UserProfileView: View {
                     .padding(.bottom, 360)
                     .edgesIgnoringSafeArea(.top)
                     .offset(y:-60)
+            
                 VStack{
-                    MyFavTabView()
-                        .padding(.horizontal,1)
-                        .shadow(radius: 1)
-                    
-                    Spacer(minLength: 15)
+                    if !serviceProvider.isServiceProvider{
+                        RegistrationBoxView()
+                    }
                     
                     
                     VStack {
                         OptionsView(title: "My Account", icon: "person.crop.circle")
                         Divider()
-                        OptionsView(title: "My Pets", icon: "pawprint")
+                        NavigationLink(destination: FavPalView()){
+                            OptionsView(title: "My Pets", icon: "pawprint")
+                        }
                         Divider()
                         OptionsView(title: "My Address", icon: "location")
                         Divider()
-                        OptionsView(title: "My Payments", icon: "creditcard")
+                        OptionsView(title: "Favourite Pals", icon: "heart")
+                        Divider()
+                        OptionsView(title: "Help Center", icon: "questionmark.circle")
+                        Divider()
                     }
                     .padding()
                     .background(RoundedRectangle(cornerRadius: 15)
                     .fill(Color.white)
-                    .shadow(radius: 5))
-                    .padding(.horizontal)
+                    .padding(.horizontal))
                     
-                    //Register your service
-                    if !serviceProvider.isServiceProvider{
-                        RegistrationBoxView()
-                            .shadow(radius: 5)
-                    }
-                    
-                    
-//                    VStack{
-//                        Text("My Pets")
-//                            .fontWeight(.semibold)
-//                            .font(.title2)
-//                            .padding(.top)
-//                        SelectYourPetsView()
-//                    }
-//                    .padding(.horizontal)
+                    //Booking section
                     
                     
                     
                     
-                    
+                    //
                     Button("Log Out") {
                         
                     }

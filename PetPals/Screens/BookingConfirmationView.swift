@@ -81,7 +81,7 @@ struct BookingConfirmationView: View {
                                 .foregroundColor(.white)
                                 .frame(width:22,height: 22)
                                 .padding()
-                                .background(Color.orange)
+                                .background(Color("Cinnamon"))
                                 .cornerRadius(12)
                         }
                         
@@ -137,11 +137,11 @@ struct BookingConfirmationView: View {
                             .foregroundColor(.white)
                             .frame(width: 250, height: 22)
                             .padding()
-                            .background(Color.orange)
+                            .background(Color("Cinnamon"))
                             .cornerRadius(12)
-                            .padding(.horizontal)
+                            
                     }
-                    .padding(.top, 20)
+                    .padding(.top)
                 
                 // Next Steps Section
                 VStack(alignment: .leading) {
@@ -166,10 +166,11 @@ struct BookingConfirmationView: View {
                 .foregroundColor(.white)
                 .frame(width:100)
                 .padding()
-                .background(Color.red)
+                .background(Color.green)
                 .cornerRadius(12)
                 .padding(.horizontal)
                 .padding(.bottom, 20)
+                .padding(.top)
                 
 
             }

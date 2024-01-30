@@ -175,8 +175,8 @@ struct PalProfileView: View {
                         .environmentObject(userBooking)){
                             Text("Book")
                                 .foregroundStyle(.white)
-                                .frame(width: 140,height: 40)
-                                .background(.appYellow)
+                                .frame(width: 160,height: 40)
+                                .background(Color("Cinnamon"))
                                 .clipShape(RoundedRectangle(cornerRadius: 8))
                         }
                 }

@@ -19,6 +19,7 @@
 		0F97D3DE2B68B20F00117AA4 /* RegistrationBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F97D3DD2B68B20F00117AA4 /* RegistrationBoxView.swift */; };
 		0F97D3E02B68B27600117AA4 /* JobsServicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F97D3DF2B68B27600117AA4 /* JobsServicesView.swift */; };
 		0F98708A2B42F60A0028B1F9 /* MyFavTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9870892B42F60A0028B1F9 /* MyFavTabView.swift */; };
+		0FDBF9FD2B68EE3300229405 /* UserProfileView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDBF9FC2B68EE3300229405 /* UserProfileView2.swift */; };
 		41055D352B656028001917FA /* ServiceProviderDM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41055D342B656028001917FA /* ServiceProviderDM.swift */; };
 		41055D372B65893C001917FA /* becomeASitterBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41055D362B65893C001917FA /* becomeASitterBanner.swift */; };
 		415043192B23BD8500359C47 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415043182B23BD8500359C47 /* HomeView.swift */; };
@@ -80,6 +81,7 @@
 		0F97D3DD2B68B20F00117AA4 /* RegistrationBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationBoxView.swift; sourceTree = "<group>"; };
 		0F97D3DF2B68B27600117AA4 /* JobsServicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobsServicesView.swift; sourceTree = "<group>"; };
 		0F9870892B42F60A0028B1F9 /* MyFavTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFavTabView.swift; sourceTree = "<group>"; };
+		0FDBF9FC2B68EE3300229405 /* UserProfileView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView2.swift; sourceTree = "<group>"; };
 		41055D342B656028001917FA /* ServiceProviderDM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProviderDM.swift; sourceTree = "<group>"; };
 		41055D362B65893C001917FA /* becomeASitterBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = becomeASitterBanner.swift; sourceTree = "<group>"; };
 		415043182B23BD8500359C47 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 				41A259602B5B07B200097E06 /* BookingConfirmationView.swift */,
 				41D783692B6590CA000B6FEA /* ServiceProviderListingView.swift */,
 				0F97D3DF2B68B27600117AA4 /* JobsServicesView.swift */,
+				0FDBF9FC2B68EE3300229405 /* UserProfileView2.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 				0F8DE3E52B375B8400C2E40D /* ImageCarouselView.swift in Sources */,
 				41D783D42B684A45000B6FEA /* MultiImagePicker.swift in Sources */,
 				41E64B982B3375C300D1B25E /* ServiceProviderOnboardingView.swift in Sources */,
+				0FDBF9FD2B68EE3300229405 /* UserProfileView2.swift in Sources */,
 				41949D582B62DF4B00F4577B /* UserBookingDM.swift in Sources */,
 				419369632B2C783E00E8694E /* PalsNearbyView.swift in Sources */,
 				418035BC2B3AC5690083B804 /* ResultsTopBar.swift in Sources */,

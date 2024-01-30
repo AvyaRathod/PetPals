@@ -79,7 +79,7 @@ struct LoginView: View {
                         . fontWeight(.semibold)
                         . foregroundColor(.white)
                         .frame(width: 360, height: 44)
-                        .background(Color(.systemBlue))
+                        .background(Color(.cinnamon))
                         .cornerRadius (8)
                 }
                 . padding (.vertical)

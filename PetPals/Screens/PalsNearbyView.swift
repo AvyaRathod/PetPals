@@ -41,7 +41,7 @@ struct PalsNearbyView: View {
                         Label("Filter", systemImage: "line.horizontal.3.decrease.circle")
                             .padding(.horizontal)
                             .padding(.vertical, 5)
-                            .background(Color("app_yellow"))
+                            .background(Color("Cinnamon"))
                             .foregroundColor(.white)
                             .cornerRadius(15)
                     }

@@ -34,14 +34,15 @@ struct becomeASitterBanner: View {
                         .foregroundColor(.white)
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .background(Color.appYellow)
+                        .background(Color("Cinnamon"))
                         .cornerRadius(10)
                 }
             }
             .padding()
-            .frame(height: 250.0)
+            .frame(width: 360, height: 250.0)
             .cornerRadius(10)
-            .frame(width: UIScreen.main.bounds.width - 40) // Adjust width to match image width
+//            .frame(width: UIScreen.main.bounds.width - 40) 
+            // Adjust width to match image width
         }
         .padding()
         .shadow(radius: 5)
