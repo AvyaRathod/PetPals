@@ -183,7 +183,9 @@ struct HomeView: View {
                 // Become a Sitter Banner
                 if !serviceProvider.isServiceProvider{
                     becomeASitterBanner()
+                        
                 }
+                    
                 
                 // explore section
                 VStack(alignment: .leading) {
