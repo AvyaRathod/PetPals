@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MapKit
 
 class UserAuth: ObservableObject {
     @Published var isLoggedIn: Bool {

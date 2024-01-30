@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct LoginView: View {
     @EnvironmentObject var userAuth: UserAuth
@@ -14,7 +15,7 @@ struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
     
-    let results: Results
+    let results: Pal
     
     @Binding var startDate: Date
     @Binding var endDate: Date
@@ -134,11 +135,30 @@ struct LoginView_Previews: PreviewProvider {
     @State static var selectedPets:Set<String> = ["Tuffy", "Jerry", "Max", "Buddy"]
     
     static var previews: some View {
-        LoginView(results: Results(img: "petimage-1",
-                                   name: "Rimi Lan",
-                                   stars: 5,
-                                   address: "123 anywhere st. any city state country 123",
-                                   cost: "150"),
+        LoginView(results: Pal(
+            name: "Alice Johnson",
+            profileImage: "petimage-1",
+            rating: 4,
+            address: "123 anywhere st. any city state country 123",
+            summary: "I love spending time with furry friends and have a spacious backyard for them to play.",
+            servicesOffered: [
+                ServicesOffered(name: .dayboarding, description: "Overnight care for your pet", price: "INR 150/Night"),
+                ServicesOffered(name: .daycare, description: "Daytime care", price: "INR 100/Day")
+            ],
+            acceptedPets: ["Cats", "Dogs"],
+            neighborhoodLocation: CLLocationCoordinate2D(latitude: 12.9716, longitude: 77.5946),
+            reviews: [
+                Review(review: "Alice was wonderful with my Max!", rating: 5, username: "John Doe", profileImage: "profilepic-1"),
+                Review(review: "Very caring and attentive.", rating: 4, username: "Emma Stone", profileImage: "profilepic-2"),
+                Review(review: "Best pet sitter in town!", rating: 5, username: "Mike Ross", profileImage: "profilepic-3"),
+                Review(review: "Highly recommend Alice for pet sitting.", rating: 4, username: "Sarah Connor", profileImage: "profilepic-4")
+            ],
+            contactInfo: ContactInformation(
+                phoneNumber: "1234567890",
+                instagramHandle: "@alicepets",
+                whatsappNumber: "9876543210"
+            )
+        ),
                   startDate: $mockStartDate, endDate: $mockEndDate, startTime: $mockStartDate, endTime: $mockEndDate,
         selectedPets: $selectedPets,
         selectedService: $selectedService)

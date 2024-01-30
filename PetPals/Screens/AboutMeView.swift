@@ -38,6 +38,8 @@ struct AboutMeView: View {
                         TextField("e.g. Tell us about your other experience in training, grooming etc .",text: $Qualifications)
                     }
                 }
+                
+                
                 NavigationLink(destination:HomeView()){
                     Button(action: {
                         serviceProvider.isServiceProvider=true

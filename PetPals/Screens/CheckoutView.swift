@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct CheckoutView: View {
     
-    let results: Results
+    let results: Pal
     
     @Binding var startDate: Date
     @Binding var endDate: Date
@@ -42,7 +43,7 @@ struct CheckoutView: View {
                                 .foregroundColor(.secondary)
                             
                             HStack {
-                                ForEach(0..<results.stars!, id: \.self) { _ in
+                                ForEach(0..<results.rating, id: \.self) { _ in
                                     Image(systemName: "star.fill")
                                         .foregroundColor(.yellow)
                                 }
@@ -86,13 +87,23 @@ struct CheckoutView: View {
                         
                         Divider()
                         
+                        HStack {
+                            Text("Service")
+                            Spacer()
+                            Text(selectedService)
+                                .fontWeight(.bold)
+                        }
+                        .padding([.leading, .trailing, .top])
+                        
+                        Divider()
+                        
                         // Price Details
                         VStack(alignment: .leading) {
                             HStack {
                                 Text("Price")
                                     .font(.title2)
                                 Spacer()
-                                Text(results.cost)
+//                                Text(results.cost)
                                     .font(.title2)
                                     .fontWeight(.bold)
                             }
@@ -177,7 +188,7 @@ struct PaymentMethodView: View {
     var methodName: String
     @Binding var selectedPaymentMethod: String?
     
-    let results: Results
+    let results: Pal
     
     @Binding var startDate: Date
     @Binding var endDate: Date
@@ -205,7 +216,7 @@ struct PaymentMethodView: View {
                         bookingManager.addBooking(serviceProviderID: results.id,
                                                   serviceProviderName: results.name,
                                                   serviceProviderAddr: results.address,
-                                                  bookingCost: results.cost,
+                                                  bookingCost: "to be updated",
                                                   startDate: startDate,
                                                   endDate: endDate,
                                                   startTime: startTime,
@@ -218,7 +229,7 @@ struct PaymentMethodView: View {
                         bookingManager.addBooking(serviceProviderID: results.id,
                                                   serviceProviderName: results.name,
                                                   serviceProviderAddr: results.address,
-                                                  bookingCost: results.cost,
+                                                  bookingCost: "to be updated",
                                                   startDate: startDate,
                                                   endDate: endDate,
                                                   startTime: startTime,
@@ -267,11 +278,30 @@ struct CheckoutView_Previews: PreviewProvider {
     
     static var previews: some View {
         NavigationView {
-            CheckoutView(results: Results(img: "petimage-1",
-                                          name: "Rimi Lan",
-                                          stars: 5,
-                                          address: "123 anywhere st. any city state country 123",
-                                          cost: "150"),
+            CheckoutView(results: Pal(
+                name: "Alice Johnson",
+                profileImage: "petimage-1",
+                rating: 4,
+                address: "123 anywhere st. any city state country 123",
+                summary: "I love spending time with furry friends and have a spacious backyard for them to play.",
+                servicesOffered: [
+                    ServicesOffered(name: .dayboarding, description: "Overnight care for your pet", price: "INR 150/Night"),
+                    ServicesOffered(name: .daycare, description: "Daytime care", price: "INR 100/Day")
+                ],
+                acceptedPets: ["Cats", "Dogs"],
+                neighborhoodLocation: CLLocationCoordinate2D(latitude: 12.9716, longitude: 77.5946),
+                reviews: [
+                    Review(review: "Alice was wonderful with my Max!", rating: 5, username: "John Doe", profileImage: "profilepic-1"),
+                    Review(review: "Very caring and attentive.", rating: 4, username: "Emma Stone", profileImage: "profilepic-2"),
+                    Review(review: "Best pet sitter in town!", rating: 5, username: "Mike Ross", profileImage: "profilepic-3"),
+                    Review(review: "Highly recommend Alice for pet sitting.", rating: 4, username: "Sarah Connor", profileImage: "profilepic-4")
+                ],
+                contactInfo: ContactInformation(
+                    phoneNumber: "1234567890",
+                    instagramHandle: "@alicepets",
+                    whatsappNumber: "9876543210"
+                )
+            ),
                          startDate: $mockStartDate, endDate: $mockEndDate, startTime: $mockStartDate, endTime: $mockEndDate,
                          selectedPets:$selectedPets,
                          selectedService:$selectedService)

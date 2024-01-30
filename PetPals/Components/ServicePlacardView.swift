@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Service: Identifiable {
+struct Service:Identifiable{
     let id = UUID()
     let img: String
     let title: String

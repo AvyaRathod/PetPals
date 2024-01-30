@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct BookingConfirmationView: View {
 
-    let results: Results
+    let results: Pal
     
     @Binding var startDate: Date
     @Binding var endDate: Date
@@ -18,7 +19,7 @@ struct BookingConfirmationView: View {
     @Binding var selectedPets: Set<String>
     @Binding var selectedService: String
     
-    init(results: Results, startDate: Date, endDate: Date, startTime: Date, endTime: Date, selectedPets: Set<String>, selectedService: String) {
+    init(results: Pal, startDate: Date, endDate: Date, startTime: Date, endTime: Date, selectedPets: Set<String>, selectedService: String) {
             self.results = results
             self._startDate = Binding.constant(startDate)
             self._endDate = Binding.constant(endDate)
@@ -29,7 +30,7 @@ struct BookingConfirmationView: View {
         }
 
         // Initializing with bindings
-    init(results: Results, startDate: Binding<Date>, endDate: Binding<Date>, startTime: Binding<Date>, endTime: Binding<Date>, selectedPets: Binding<Set<String>>, selectedService: Binding<String>) {
+    init(results: Pal, startDate: Binding<Date>, endDate: Binding<Date>, startTime: Binding<Date>, endTime: Binding<Date>, selectedPets: Binding<Set<String>>, selectedService: Binding<String>) {
         self.results = results
         self._startDate = startDate
         self._endDate = endDate
@@ -189,11 +190,30 @@ struct BookingConfirmationView_Previews: PreviewProvider {
     
     static var previews: some View {
         NavigationView {
-            BookingConfirmationView(results: Results(img: "petimage-1",
-                                          name: "Rimi Lan",
-                                          stars: 5,
-                                          address: "123 anywhere st. any city state country 123",
-                                          cost: "150"),
+            BookingConfirmationView(results: Pal(
+                name: "Alice Johnson",
+                profileImage: "petimage-1",
+                rating: 4,
+                address: "123 anywhere st. any city state country 123",
+                summary: "I love spending time with furry friends and have a spacious backyard for them to play.",
+                servicesOffered: [
+                    ServicesOffered(name: .dayboarding, description: "Overnight care for your pet", price: "INR 150/Night"),
+                    ServicesOffered(name: .daycare, description: "Daytime care", price: "INR 100/Day")
+                ],
+                acceptedPets: ["Cats", "Dogs"],
+                neighborhoodLocation: CLLocationCoordinate2D(latitude: 12.9716, longitude: 77.5946),
+                reviews: [
+                    Review(review: "Alice was wonderful with my Max!", rating: 5, username: "John Doe", profileImage: "profilepic-1"),
+                    Review(review: "Very caring and attentive.", rating: 4, username: "Emma Stone", profileImage: "profilepic-2"),
+                    Review(review: "Best pet sitter in town!", rating: 5, username: "Mike Ross", profileImage: "profilepic-3"),
+                    Review(review: "Highly recommend Alice for pet sitting.", rating: 4, username: "Sarah Connor", profileImage: "profilepic-4")
+                ],
+                contactInfo: ContactInformation(
+                    phoneNumber: "1234567890",
+                    instagramHandle: "@alicepets",
+                    whatsappNumber: "9876543210"
+                )
+            ),
                          startDate: $mockStartDate, endDate: $mockEndDate, startTime: $mockStartDate, endTime: $mockEndDate,
                          selectedPets:$selectedPets,
                          selectedService:$selectedService)

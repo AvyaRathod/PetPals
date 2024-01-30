@@ -6,248 +6,244 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct HomeView: View {
     
     @EnvironmentObject var serviceProvider: ServiceProvider
     @EnvironmentObject var userBooking: BookingManager
-
+    
     @State private var searchText = ""
     
     
+    
     var body: some View {
-            ScrollView {
-                VStack(alignment: .leading) {
-                    // Search Bar
-                    TextField("Search Pets, Pals, Services ... ", text: $searchText)
-                        .textFieldStyle(.roundedBorder)
-                        .padding()
-                    
-                    // Services Offered Section
-                    Text("Services offered")
-                        .font(.headline)
-                        .foregroundColor(.black) // Text color set to white
-                        .padding(.leading)
+        ScrollView {
+            VStack(alignment: .leading) {
+                // Search Bar
+                TextField("Search Pets, Pals, Services ... ", text: $searchText)
+                    .textFieldStyle(.roundedBorder)
+                    .padding()
+                
+                // Services Offered Section
+                Text("Services offered")
+                    .font(.headline)
+                    .foregroundColor(.black) // Text color set to white
+                    .padding(.leading)
+                
+                HStack {
+                    ServiceView(serviceName: "Boarding")
+                    ServiceView(serviceName: "Daycare")
+                    ServiceView(serviceName: "Sitting")
+                    ServiceView(serviceName: "Walking")
+                }
+                // My bookings
+                if userBooking.bookings.count > 0 {
                     
                     HStack {
-                        ServiceView(serviceName: "Boarding")
-                        ServiceView(serviceName: "Daycare")
-                        ServiceView(serviceName: "Sitting")
-                        ServiceView(serviceName: "Walking")
-                    }
-                    // My bookings
-                    if userBooking.bookings.count > 0 {
-                        
-                        HStack {
                         Text("My bookings")
                             .font(.headline)
                             .foregroundColor(.black) // Text color set to white
                         
                         Spacer()
                         
-                            if userBooking.bookings.count > 1{
-                                NavigationLink(destination: PalsNearbyView(serviceName: "None")) {
-                                    HStack(spacing: 6.0) {
-                                        Text("View All")
-                                            .foregroundColor(.white)
-                                        Image(systemName: "chevron.right")
-                                            .foregroundColor(.white)
-                                        
-                                    }
-                                    .padding(6.0)
+                        if userBooking.bookings.count > 1{
+                            NavigationLink(destination: PalsNearbyView(serviceName: "None")) {
+                                HStack(spacing: 6.0) {
+                                    Text("View All")
+                                        .foregroundColor(.white)
+                                    Image(systemName: "chevron.right")
+                                        .foregroundColor(.white)
+                                    
                                 }
-                                .background(Color("app_yellow"))
-                                .cornerRadius(15)
+                                .padding(6.0)
                             }
+                            .background(Color("app_yellow"))
+                            .cornerRadius(15)
+                        }
                     }
                     .padding(.horizontal)
-                        if let firstBooking = userBooking.bookings.first {
-                            VStack(alignment: .leading, spacing: 10){
-                                Text("Confirmed")
-                                    .fontWeight(.bold)
-                                    .foregroundColor(Color.green)
+                    if let firstBooking = userBooking.bookings.first {
+                        VStack(alignment: .leading, spacing: 10){
+                            Text("Confirmed")
+                                .fontWeight(.bold)
+                                .foregroundColor(Color.green)
+                            
+                            HStack{
                                 
-                                HStack{
-                                    
-                                    VStack(alignment: .leading) {
-                                        Text("Friday") // check how to convert date to day
-                                            .fontWeight(.bold)
-                                        Text(firstBooking.startDate, style: .date)
-                                            .foregroundColor(.secondary)
-                                    }
-                                    
-                                    Spacer()
-                                    
-                                    VStack(alignment: .leading) {
-                                        Text(firstBooking.selectedService)
-                                            .fontWeight(.bold)
-                                        Text(firstBooking.startTime, style: .time)
-                                            .foregroundColor(.secondary)
-                                    }
-                                    
-                                    Spacer()
-                                    
-                                    VStack(alignment: .leading) {
-                                        Text("For \(firstBooking.selectedPets.count)")
-                                            .fontWeight(.bold)
-                                        Text("Pets")
-                                            .foregroundColor(.secondary)
-                                    }
-                                }.padding(.leading)
-                                
-                                
-                                HStack {
-                                    VStack(alignment: .leading){
-                                        Text(firstBooking.serviceProviderName)
-                                            .font(.title)
-                                            .fontWeight(.bold)
-                                        
-                                        
-                                        Text(firstBooking.serviceProviderAddr)
-                                            .font(.footnote)
-                                            .foregroundColor(.secondary)
-                                    }
-                                    
-                                    Spacer()
-                                    
-                                    Button(action: {
-                                        // Action for venue location
-                                    }) {
-                                        Image(systemName: "map")
-                                            .foregroundColor(.white)
-                                            .frame(width:15,height: 15)
-                                            .padding()
-                                            .background(Color.orange)
-                                            .cornerRadius(12)
-                                    }
-                                    
+                                VStack(alignment: .leading) {
+                                    Text("Friday") // check how to convert date to day
+                                        .fontWeight(.bold)
+                                    Text(firstBooking.startDate, style: .date)
+                                        .foregroundColor(.secondary)
                                 }
-                                .padding(.leading)
                                 
-                                NavigationLink(destination: BookingConfirmationView(results: Results(img: nil,name: firstBooking.serviceProviderName, stars: nil, address: firstBooking.serviceProviderAddr, cost: firstBooking.bookingCost), startDate: firstBooking.startDate, endDate: firstBooking.endDate, startTime: firstBooking.startTime, endTime: firstBooking.endTime, selectedPets: firstBooking.selectedPets, selectedService: firstBooking.selectedService)){
-                                    Text("View Details")
+                                Spacer()
+                                
+                                VStack(alignment: .leading) {
+                                    Text(firstBooking.selectedService)
+                                        .fontWeight(.bold)
+                                    Text(firstBooking.startTime, style: .time)
+                                        .foregroundColor(.secondary)
+                                }
+                                
+                                Spacer()
+                                
+                                VStack(alignment: .leading) {
+                                    Text("For \(firstBooking.selectedPets.count)")
+                                        .fontWeight(.bold)
+                                    Text("Pets")
+                                        .foregroundColor(.secondary)
+                                }
+                            }.padding(.leading)
+                            
+                            
+                            HStack {
+                                VStack(alignment: .leading){
+                                    Text(firstBooking.serviceProviderName)
+                                        .font(.title)
+                                        .fontWeight(.bold)
+                                    
+                                    
+                                    Text(firstBooking.serviceProviderAddr)
+                                        .font(.footnote)
+                                        .foregroundColor(.secondary)
+                                }
+                                
+                                Spacer()
+                                
+                                Button(action: {
+                                    // Action for venue location
+                                }) {
+                                    Image(systemName: "map")
                                         .foregroundColor(.white)
-                                        .frame(width: 250, height: 15)
+                                        .frame(width:15,height: 15)
                                         .padding()
                                         .background(Color.orange)
                                         .cornerRadius(12)
-                                        .padding(.horizontal)
                                 }
-                                .padding([.trailing,.leading])
                                 
                             }
-                            .padding()
-                            .frame(width:360)
-                            .background (.white)
-                            .clipShape (RoundedRectangle (cornerRadius: 12))
-                            .padding()
-                            .shadow(radius: 10)
-                        }
-                }
-                    
-                    
-                    // Pals Nearby Section
-                    HStack {
-                        Text("Pals nearby")
-                            .font(.headline)
-                            .foregroundColor(.black) // Text color set to white
-                        
-                        Spacer()
-                        
-                        NavigationLink(destination: PalsNearbyView(serviceName: "None")) {
-                            HStack(spacing: 6.0) {
-                                Text("View All")
-                                    .foregroundColor(.white)
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(.white)
-                                
-                            }
-                            .padding(6.0)
-                        }
-                        .background(Color("app_yellow"))
-                        .cornerRadius(15)
-                    }
-                    .padding(.horizontal)
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack {
-                            PalView(palName: "Jack Bird", palPets: "Dogs, Cats", imageName: "p1")
-                            PalView(palName: "Rimi Lan", palPets: "Dogs, Cats",imageName: "p2")
-                            PalView(palName: "Rimi Lan", palPets: "Dogs, Cats",imageName: "p3")
-                        }
-                    }
-                    .padding(.horizontal)
-                    
-                    // Become a Sitter Banner
-                    if !serviceProvider.isServiceProvider{
-                        ZStack {
-                            // Background image
-                            Image("p11")
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(height: 200)
-                                .cornerRadius(10)
+                            .padding(.leading)
                             
-                            // Text and button overlay
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text("Become a Sitter")
-                                    .font(.title)
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.black)
-                                
-                                Text("Earn extra income and unlock new opportunities by sharing your space and love for pets")
-                                    .foregroundColor(.black)
-                                    .padding(.bottom, 20)
-                                
-                                NavigationLink(destination: UserProfileView()){
-                                    Text("Learn more")
-                                        .bold()
-                                        .foregroundColor(.white)
-                                        .padding()
-                                        .frame(maxWidth: .infinity)
-                                        .background(Color.appYellow)
-                                        .cornerRadius(10)
-                                }
-                            }
-                            .padding()
-                            .cornerRadius(10)
+                            //                                NavigationLink(destination: BookingConfirmationView(results: Results(img: nil,name: firstBooking.serviceProviderName, stars: nil, address: firstBooking.serviceProviderAddr, cost: firstBooking.bookingCost), startDate: firstBooking.startDate, endDate: firstBooking.endDate, startTime: firstBooking.startTime, endTime: firstBooking.endTime, selectedPets: firstBooking.selectedPets, selectedService: firstBooking.selectedService)){
+                            Text("View Details")
+                                .foregroundColor(.white)
+                                .frame(width: 250, height: 15)
+                                .padding()
+                                .background(Color.orange)
+                                .cornerRadius(12)
+                                .padding(.horizontal)
                         }
-                        .padding()
-                    }
-                    
-                    // explore section
-                    VStack(alignment: .leading) {
-                        Text("12 pals to explore")
-                            .font(.headline)
-                            .foregroundColor(Color.black)
-                        Divider()
-                            .frame(width: 200.0)
+                        .padding([.trailing,.leading])
                         
-                        ScrollView {
-                            LazyVStack(spacing: 8) {
-                                ForEach(0..<10) { index in // Replace with actual data source
-                                    BookingPlacard(results: Results(img: "petimage-1",
-                                                                    name: "Rimi Lan",
-                                                                    stars: 5,
-                                                                    address: "123 anywhere st. any city state country 123",
-                                                                    cost: "150")).environmentObject(userBooking)
-                                    
-                                    Divider()
-                                }
-                            }
-                        }
-                    }.padding()
+                        //                            }
+                        .padding()
+                        .frame(width:360)
+                        .background (.white)
+                        .clipShape (RoundedRectangle (cornerRadius: 12))
+                        .padding()
+                        .shadow(radius: 10)
+                    }
+                }
+                
+                
+//                // Pals Nearby Section
+                HStack {
+                    Text("Pals nearby")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color.primary)
                     
+                    Spacer()
+                    
+                    NavigationLink(destination: PalsNearbyView(serviceName: "None")) {
+                        HStack(spacing: 6.0) {
+                            Text("View All")
+                                .foregroundColor(.white)
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.white)
+                            
+                        }
+                        .padding(6.0)
+                    }
+                    .background(Color("app_yellow"))
+                    .cornerRadius(15)
+                }
+                .padding(.horizontal)
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
+                        PalView(palName: "Jack Bird", palPets: "Dogs, Cats", imageName: "p1")
+                        PalView(palName: "Rimi Lan", palPets: "Dogs, Cats",imageName: "p2")
+                        PalView(palName: "Rimi Lan", palPets: "Dogs, Cats",imageName: "p3")
+                    }
+                }
+                .padding(.horizontal)
+                
+                // Become a Sitter Banner
+                if !serviceProvider.isServiceProvider{
+                    becomeASitterBanner()
+                }
+                
+                // explore section
+                VStack(alignment: .leading) {
+                    // Title
+                    Text("\(palsArray.count) pals to explore")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color.primary)
+                        .padding(.leading)
+                    
+                    // Filter and Sort Menus
+                    HStack {
+                        Menu {
+                            Button("Cost", action: { /* Apply cost filter */ })
+                            Button("Distance", action: { /* Apply distance filter */ })
+                        } label: {
+                            Label("Filter", systemImage: "line.horizontal.3.decrease.circle")
+                                .padding(.horizontal)
+                                .padding(.vertical, 5)
+                                .background(Color("app_yellow"))
+                                .foregroundColor(.white)
+                                .cornerRadius(15)
+                        }
+                        
+                        Menu {
+                            Button("Cost", action: { /* Apply cost filter */ })
+                            Button("Distance", action: { /* Apply distance filter */ })
+                        } label: {
+                            Label("Sort", systemImage: "arrow.up.arrow.down")
+                                .padding(.horizontal)
+                                .padding(.vertical, 5)
+                                .background(Color("app_yellow"))
+                                .foregroundColor(.white)
+                                .cornerRadius(15)
+                        }
+                        Spacer()
+                    }
+                    .padding(.bottom,4)
+                    .padding(.leading)
+                                        
+                    // Pal List
+                    LazyVStack(spacing: 18) {
+                        ForEach(palsArray) { pal in
+                            BookingPlacard(results: pal)
+                                .environmentObject(userBooking)
+                        }
+                    }
                 }
             }
-            .navigationTitle("PetPals")
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarItems(trailing: NavigationLink(destination: UserProfileView()){
-                Image(systemName: "person.crop.circle")
-                    .accentColor(Color.black)
-            })
-            .navigationBarBackButtonHidden(true)
         }
+        .background(Color.white.opacity(0.9))
+        .navigationTitle("PetPals")
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarItems(trailing: NavigationLink(destination: UserProfileView()){
+            Image(systemName: "person.crop.circle")
+                .accentColor(Color.black)
+        })
+        .navigationBarBackButtonHidden(true)
     }
+}
 
 
 struct ServiceView: View {
