@@ -8,7 +8,7 @@
 import Foundation
 
 enum BookingStatus{
-    case confirmed, started, completed, canceled
+    case confirmed, started, compvared, canceled
 }
 
 enum PaymentStatus{
@@ -16,22 +16,19 @@ enum PaymentStatus{
 }
 
 struct Booking: Identifiable {
-    
-   
-    
     let id = UUID()
-    let serviceProviderID: UUID
-    let serviceProviderName: String
-    let serviceProviderAddr: String
-    let bookingCost: String
-    let startDate: Date
-    let endDate: Date
-    let startTime: Date
-    let endTime: Date
-    let selectedPets: Set<String>
-    let selectedService: String
-    let status: BookingStatus
-    let paymentStatus: PaymentStatus
+    var serviceProviderID: UUID
+    var serviceProviderName: String
+    var serviceProviderAddr: String
+    var bookingCost: String
+    var startDate: Date
+    var endDate: Date
+    var startTime: Date
+    var endTime: Date
+    var selectedPets: Set<String>
+    var selectedService: String
+    var status: BookingStatus
+    var paymentStatus: PaymentStatus
 }
 
 
