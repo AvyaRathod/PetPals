@@ -17,7 +17,7 @@ struct UserProfileView: View {
             ScrollView{
                 ZStack(){
                     RoundedRectangle(cornerRadius: 25, style: .continuous)
-                        .fill(Color("app_yellow")) // Use the color you want for the rounded rectangle
+                        .fill(Color.yellow.opacity(0.8)) // Use the color you want for the rounded rectangle
                         .frame(height: 220) // Set the height you want for the rounded rectangle
                     
                     VStack{
@@ -33,6 +33,7 @@ struct UserProfileView: View {
                                     Text("test123@gmail.com")
                                 }
                                 
+                                
                             }
                             Image("profilepic-1")
                                 .resizable()
@@ -45,59 +46,61 @@ struct UserProfileView: View {
                     .padding(.horizontal)
                     
                 }.offset(y:-25)
-                .padding(.bottom, 360)
-                .edgesIgnoringSafeArea(.top)
-                .offset(y:-80)
+                    .padding(.bottom, 360)
+                    .edgesIgnoringSafeArea(.top)
+                    .offset(y:-60)
                 VStack{
                     MyFavTabView()
-                        .shadow(radius: 5)
+                        .padding(.horizontal,1)
+                        .shadow(radius: 1)
                     
                     Spacer(minLength: 15)
                     
                     
+                    VStack {
+                        OptionsView(title: "My Account", icon: "person.crop.circle")
+                        Divider()
+                        OptionsView(title: "My Pets", icon: "pawprint")
+                        Divider()
+                        OptionsView(title: "My Address", icon: "location")
+                        Divider()
+                        OptionsView(title: "My Payments", icon: "creditcard")
+                    }
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 15)
+                    .fill(Color.white)
+                    .shadow(radius: 5))
+                    .padding(.horizontal)
+                    
                     //Register your service
                     if !serviceProvider.isServiceProvider{
-                        ZStack{
-                            RoundedRectangle(cornerRadius: 12)
-                                .frame(height: 120)
-                                .padding(.horizontal)
-                            VStack{
-                                HStack{
-                                    VStack(alignment: .leading ,spacing: 3){
-                                        Text("Register your service")
-                                            .foregroundStyle(.white)
-                                            .fontWeight(.semibold)
-                                            .font(.title2)
-                                        Text("Earn extra income and unlock new opportunities by offering your services and love to the pets.")
-                                            .foregroundStyle(.white)
-                                            .font(.caption)
-                                    }
-                                    
-                                    
-                                    Spacer()
-                                    
-                                    NavigationLink(destination:OnboardingQuestionnaireView()){
-                                        Text("Register Now")
-                                            .foregroundStyle(.white)
-                                            .frame(width: 110,height: 40)
-                                            .background(.appYellow)
-                                            .clipShape(RoundedRectangle(cornerRadius: 8))
-                                    }
-                                }
-                                .padding(.horizontal,30)
-                            }
-                        }
-                        .shadow(radius: 20)
+                        RegistrationBoxView()
+                            .shadow(radius: 5)
                     }
                     
-                    VStack{
-                        Text("My Pets")
-                            .fontWeight(.semibold)
-                            .font(.title2)
-                            .padding(.top)
-                        SelectYourPetsView()
+                    
+//                    VStack{
+//                        Text("My Pets")
+//                            .fontWeight(.semibold)
+//                            .font(.title2)
+//                            .padding(.top)
+//                        SelectYourPetsView()
+//                    }
+//                    .padding(.horizontal)
+                    
+                    
+                    
+                    
+                    
+                    Button("Log Out") {
+                        
                     }
-                    .padding(.horizontal)
+                    .frame(width: 360, height: 40, alignment: .center)
+                    .background(.red)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+                    
+                    
                 }
                 .padding(.top,-430)
             }
@@ -106,8 +109,9 @@ struct UserProfileView: View {
 }
 
 
+
 #Preview {
-    UserProfileView()        
+    UserProfileView()
         .environmentObject(ServiceProvider())
 
 }

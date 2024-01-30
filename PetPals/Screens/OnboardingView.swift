@@ -11,26 +11,19 @@ struct OnboardingView: View {
     @Binding var isOnboardingCompleted: Bool
     @State private var currentPage = 0
     
-    
     var body: some View {
         VStack {
-            HStack {
-                Spacer()
-                Button("Skip") {
-                    isOnboardingCompleted = true
-                    UserDefaults.standard.set(true, forKey: "isOnboardingCompleted")
-                }
-                .padding()
-            }
-            
             Spacer()
             
+            Text("PetPals")
+                .font(.largeTitle)
+            
             TabView(selection: $currentPage) {
-                SplashScreenView(text: "Welcome to PetPals!", imageName: "petimage-1", currentPage: $currentPage)
+                SplashScreenView(text: "Perfect if the pet needs overnight pet care", imageName: "p14", currentPage: $currentPage)
                     .tag(0)
-                SplashScreenView(text: "Connect with pet lovers!", imageName: "petimage-2", currentPage: $currentPage)
+                SplashScreenView(text: "For dogs that need a walk or two", imageName: "p15", currentPage: $currentPage)
                     .tag(1)
-                SplashScreenView(text: "Find the perfect sitter!", imageName: "petimage-3", currentPage: $currentPage)
+                SplashScreenView(text: "Perfect if the pet needs       overnight pet care", imageName: "p16", currentPage: $currentPage)
                     .tag(2)
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
@@ -51,18 +44,13 @@ struct OnboardingView: View {
                 Spacer()
                 
                 Button(action: {
-                    if currentPage < 2 {
-                        withAnimation {
-                            currentPage += 1
-                        }
-                    } else {
-                        isOnboardingCompleted = true
-                        UserDefaults.standard.set(true, forKey: "isOnboardingCompleted")
-                    }
+                    // Skip all pages and move to the home screen
+                    isOnboardingCompleted = true
+                    UserDefaults.standard.set(true, forKey: "isOnboardingCompleted")
                 }) {
-                    Image(systemName: currentPage < 2 ? "arrow.right" : "checkmark")
+                    Text("Skip")
                         .padding()
-                        .background(Circle().fill(Color.blue))
+                        .background(Circle().fill(Color.orange))
                         .foregroundColor(.white)
                 }
                 .padding(.trailing)
@@ -71,6 +59,7 @@ struct OnboardingView: View {
         .transition(.slide)
     }
 }
+
 
 struct SplashScreenView: View {
     let text: String
@@ -88,6 +77,7 @@ struct SplashScreenView: View {
             Text(text)
                 .font(.title)
                 .padding()
+                .multilineTextAlignment(.center)
         }
     }
 }

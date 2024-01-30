@@ -1,13 +1,6 @@
-//
-//  ServicePlaccardView.swift
-//  PetPals
-//
-//  Created by Avya Rathod on 20/12/23.
-//
-
 import SwiftUI
 
-struct Service:Identifiable{
+struct Service: Identifiable {
     let id = UUID()
     let img: String
     let title: String
@@ -43,7 +36,7 @@ struct ServicePlacardView: View {
                 .padding()
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color(.appYellow))
+        .background(Color.orange)
         .cornerRadius(10)
         .shadow(radius: 2)
         .padding(.horizontal)

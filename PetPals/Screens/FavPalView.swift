@@ -11,7 +11,7 @@ struct FavPalView: View {
     var body: some View {
         ZStack{
             RoundedRectangle(cornerRadius: 25, style: .continuous)
-                .fill(Color("app_brown")) // Use the color you want for the rounded rectangle
+                .fill(Color.yellow.opacity(1)) // Use the color you want for the rounded rectangle
                 .frame(height: 220) // Set the height you want for the rounded rectangle
             
            
