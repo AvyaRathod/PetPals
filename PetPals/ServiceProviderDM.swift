@@ -12,7 +12,7 @@ import SwiftUI
 struct Pal:Identifiable {
     let id = UUID()
     var name: String
-    var profileImage: String
+    var profileImage: String?
     var rating: Int
     var address: String
     var summary: String

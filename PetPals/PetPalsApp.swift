@@ -35,8 +35,8 @@ class ServiceProvider: ObservableObject {
 class BookingManager: ObservableObject {
     @Published var bookings: [Booking] = []
     
-    func addBooking(serviceProviderID:UUID, serviceProviderName: String, serviceProviderAddr: String, bookingCost: String, startDate: Date, endDate: Date, startTime: Date, endTime: Date, selectedPets: Set<String>, selectedService: String, status: BookingStatus, paymentStatus: PaymentStatus) {
-        let newBooking = Booking(serviceProviderID: serviceProviderID, serviceProviderName: serviceProviderName, serviceProviderAddr: serviceProviderAddr, bookingCost: bookingCost, startDate: startDate, endDate: endDate, startTime: startTime, endTime: endTime, selectedPets: selectedPets, selectedService: selectedService, status: status, paymentStatus: paymentStatus)
+    func addBooking(palBooked:Pal ,bookingCost: String, startDate: Date, endDate: Date, startTime: Date, endTime: Date, selectedPets: Set<String>, selectedService: String, status: BookingStatus, paymentStatus: PaymentStatus) {
+        let newBooking = Booking(palBooked:palBooked ,bookingCost: bookingCost, startDate: startDate, endDate: endDate, startTime: startTime, endTime: endTime, selectedPets: selectedPets, selectedService: selectedService, status: status, paymentStatus: paymentStatus)
         bookings.append(newBooking)
         print("booking added")
     }
@@ -92,7 +92,7 @@ struct MainTabView: View {
                     HomeView()
                 }
                 .tabItem {
-                    Label("Explore", systemImage: "magnifyingglass")
+                    Label("PetPals", systemImage: "house")
                 }
 
                 NavigationStack {

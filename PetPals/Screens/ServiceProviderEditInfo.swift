@@ -1,5 +1,5 @@
 //
-//  OnboardingQuestionnaireView.swift
+//  ServiceProviderEditInfo.swift
 //  PetPals
 //
 //  Created by Avya Rathod on 30/01/24.
@@ -8,8 +8,8 @@
 import SwiftUI
 import MapKit
 
-struct OnboardingQuestionnaireView: View {
-
+struct ServiceProviderEditInfo: View {
+    
     @State private var pal = Pal(
         name: "",
         profileImage: "",
@@ -37,6 +37,9 @@ struct OnboardingQuestionnaireView: View {
     @State private var inputImage: UIImage?
     @State private var selectedLocation = CLLocationCoordinate2D()
     @State private var images: [UIImage] = []
+    
+    @Environment(\.presentationMode) var presentationMode
+
     
     // Function to convert UIImage to Base64 String
     func convertImageToBase64String(img: UIImage) {
@@ -176,143 +179,17 @@ struct OnboardingQuestionnaireView: View {
                     
                     
                     Button("Submit") {
-                        isPreviewShown = true                }
-                }
-            }
-            .navigationBarTitle("Service Provider Onboarding", displayMode: .inline)
-            .sheet(isPresented: $isPreviewShown) {
-                ServiceProviderPreviewView(pal: pal)
-            }
-        }
-    }
-}
-
-struct PetCheckboxView: View {
-    var petName: String
-    @Binding var isSelected: Bool
-
-    var body: some View {
-        HStack {
-            Text(petName)
-            Spacer()
-            Image(systemName: isSelected ? "checkmark.square.fill" : "square")
-                .foregroundColor(isSelected ? .blue : .gray)
-        }
-        .onTapGesture {
-            isSelected.toggle()
-        }
-    }
-}
-
-struct ServiceProviderPreviewView: View {
-    
-    var pal: Pal
-    var onEdit: (() -> Void)?
-    var onSubmit: (() -> Void)?
-    @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var serviceProvider: ServiceProvider
-
-    var body: some View {
-        NavigationView {
-            ScrollView {
-                VStack(alignment: .leading) {
-                    Text("Review Your Information")
-                        .font(.title)
-                        .padding()
-                    
-                    Group {
-                        Text("Name: \(pal.name)")
-                        Text("Contact Number: \(pal.contactInfo.phoneNumber)")
-                        if let whatsappNumber = pal.contactInfo.whatsappNumber {
-                            Text("WhatsApp Number: \(whatsappNumber)")
-                        }
-                        if let instagramHandle = pal.contactInfo.instagramHandle {
-                            Text("Instagram Handle: \(instagramHandle)")
-                        }
-                        Text("Summary: \(pal.summary)")
-                        
-                        // Display services
-                        ForEach(pal.servicesOffered, id: \.name) { service in
-                            VStack(alignment: .leading) {
-                                Text("Service: \(service.name.rawValue)")
-                                Text("Description: \(service.description)")
-                                Text("Price: \(service.price)")
-                            }
-                        }
-                        
-                        // Display accepted pets
-                        Text("Accepted Pets: \(pal.acceptedPets.joined(separator: ", "))")
-                    }
-                    .padding()
-                    
-                    // Display location if available
-                    if CLLocationCoordinate2DIsValid(pal.neighborhoodLocation) {
-                        Text("Location: Latitude \(pal.neighborhoodLocation.latitude), Longitude \(pal.neighborhoodLocation.longitude)")
-                    }
-                    
-//                    // Display profile image if available
-//                    if let image = UIImage(data: Data(base64Encoded: pal.profileImage) ?? Data()) {
-//                        Image(uiImage: image)
-//                            .resizable()
-//                            .scaledToFit()
-//                            .frame(width: 100, height: 100)
-//                            .clipShape(Circle())
-//                    }
-                    
-                    NavigationLink(destination: HomeView()){
-                        Text("Submit")
-                    }
-                    .onTapGesture {
-                    }
-                    
-                }
-                .navigationBarTitle("Preview", displayMode: .inline)
-                .navigationBarItems(
-                    trailing: Button("Edit") {
                         presentationMode.wrappedValue.dismiss()
                     }
-                )
+                }
             }
+            
         }
+        .navigationBarTitle("Service Provider Onboarding", displayMode: .inline)
     }
 }
 
-    struct OnboardingQuestionnaireView_Previews: PreviewProvider {
-        static var previews: some View {
-            OnboardingQuestionnaireView()
-        }
-    }
 
-    // ImagePicker View
-    struct ImagePicker: UIViewControllerRepresentable {
-        @Environment(\.presentationMode) var presentationMode
-        @Binding var image: UIImage?
-
-        func makeUIViewController(context: Context) -> some UIViewController {
-            let picker = UIImagePickerController()
-            picker.delegate = context.coordinator
-            return picker
-        }
-
-        func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {}
-
-        func makeCoordinator() -> Coordinator {
-            Coordinator(self)
-        }
-
-        class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-            let parent: ImagePicker
-
-            init(_ parent: ImagePicker) {
-                self.parent = parent
-            }
-
-            func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-                if let uiImage = info[.originalImage] as? UIImage {
-                    parent.image = uiImage
-                }
-
-                parent.presentationMode.wrappedValue.dismiss()
-            }
-        }
-    }
+#Preview {
+    ServiceProviderEditInfo()
+}

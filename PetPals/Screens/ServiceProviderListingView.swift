@@ -9,26 +9,15 @@ import SwiftUI
 import MapKit
 
 struct ServiceProviderListingView: View {
-    @EnvironmentObject var userAuth: UserAuth
-    @EnvironmentObject var userBooking: BookingManager
     
     let results: Pal
-    
-    @State private var isFavorite: Bool = false
-    @State private var isShareButtonPressed = false
-    
-    let services: [ServicesOffered] = [
-        ServicesOffered(name: .dayboarding, description: "Overnight care for your pet", price: "INR 150/Night"),
-        ServicesOffered(name: .daycare, description: "Daytime care", price: "INR 100/Day"),
-        // Add more services as needed
-    ]
+    @State private var isEditPressed = false
     
     var body: some View {
         VStack{
             ScrollView{
                 ImageCarouselView()
-                
-                
+
                 HStack(){
                     Image("profilepic-1")
                         .resizable()
@@ -43,7 +32,6 @@ struct ServiceProviderListingView: View {
                         StarRatingView(rating: 4) // Example rating
                         
                         // Contact and Social Media Links
-
                         HStack(spacing:25) {
                             Button(action: { callPhone() }) {
                                 Image(systemName: "phone.fill")
@@ -79,7 +67,7 @@ struct ServiceProviderListingView: View {
                     Text("Summary")
                         .font(.title3)
                         .fontWeight(.bold)
-                    Text("I'm an undergraduate at SRM University . I'm currently in my 4th year. Being 4th year student I've classes once - twice a week. Making it possible to spend more time with pet.")
+                    Text(results.summary)
                         .fontWeight(.light)
                         .padding(.horizontal)
                     Divider()
@@ -90,7 +78,7 @@ struct ServiceProviderListingView: View {
                             .font(.title3)
                             .fontWeight(.bold)
                         
-                        ForEach(services, id: \.name) { service in
+                        ForEach(results.servicesOffered, id: \.name) { service in
                             VStack(alignment: .leading) {
                                 Text(service.name.rawValue)
                                     .fontWeight(.bold)
@@ -102,7 +90,6 @@ struct ServiceProviderListingView: View {
                             }
                             .padding(.vertical, 2)
                             .padding(.horizontal)
-                            
                         }
                     }
                     Divider()
@@ -110,12 +97,13 @@ struct ServiceProviderListingView: View {
                     Text("Accepted Pets")
                         .font(.title3)
                         .fontWeight(.bold)
-                    Text("Cats")
-                        .fontWeight(.light)
-                        .padding(.horizontal)
-                    Text("Dogs")
-                        .fontWeight(.light)
-                        .padding(.horizontal)
+                    
+                    ForEach(results.acceptedPets, id: \.self) { pet in
+                        Text(pet)
+                            .fontWeight(.light)
+                            .padding(.horizontal)
+                    }
+                    
                     Divider()
                     
                     VStack(alignment: .leading){
@@ -126,61 +114,23 @@ struct ServiceProviderListingView: View {
                             .frame(height: 200)
                             .clipShape(RoundedRectangle(cornerRadius: 12))
                     }
-                    Divider()
-                    
-                    VStack(alignment: .leading, spacing: -20){
-                        Text("Reviews")
-                            .font(.title3)
-                            .fontWeight(.bold)
-                        ReviewsView()
-                    }
                 }
                 .padding(.horizontal)
             }
-            VStack{
-                Divider()
-                    .padding(.bottom)
-                
-                HStack{
-                    VStack(alignment: .leading){
-                        Text("Services starting from ₹150")
-                            .foregroundStyle(.white)
-                            .fontWeight(.semibold)
-                    }
-                    Spacer()
-                    
-                    NavigationLink(destination: RequestView(results: results).environmentObject(userAuth)
-                        .environmentObject(userBooking)){
-                            Text("Book")
-                                .foregroundStyle(.white)
-                                .frame(width: 140,height: 40)
-                                .background(Color("Cinnamon"))
-                                .clipShape(RoundedRectangle(cornerRadius: 8))
-                        }
-                }
-                .padding(.horizontal)
-            }
-            .background(.appBrown)
-            
         }
         .navigationTitle(results.name)
         .navigationBarItems(trailing:
                                 HStack {
             Button(action: {
-                isFavorite.toggle()
-            }) {
-                Image(systemName: isFavorite ? "heart.fill" : "heart")
-                    .foregroundColor(isFavorite ? .red : .gray)
-            }
-            
-            Button(action: {
-                isShareButtonPressed.toggle()
+                isEditPressed = true
             }){
-                Image(systemName: "square.and.arrow.up")
-                    .foregroundColor(.gray)
+                Text("Edit")
             }
         }
         )
+        .sheet(isPresented: $isEditPressed){
+            ServiceProviderEditInfo()
+        }
     }
 }
 

@@ -19,15 +19,15 @@ struct BookingConfirmationView: View {
     @Binding var selectedPets: Set<String>
     @Binding var selectedService: String
     
-    init(results: Pal, startDate: Date, endDate: Date, startTime: Date, endTime: Date, selectedPets: Set<String>, selectedService: String) {
-            self.results = results
-            self._startDate = Binding.constant(startDate)
-            self._endDate = Binding.constant(endDate)
-            self._startTime = Binding.constant(startTime)
-            self._endTime = Binding.constant(endTime)
-            self._selectedPets = Binding.constant(selectedPets)
-            self._selectedService = Binding.constant(selectedService)
-        }
+    init(Bookinginfo: Booking) {
+        self.results = Bookinginfo.palBooked
+        self._startDate = Binding.constant(Bookinginfo.startDate)
+        self._endDate = Binding.constant(Bookinginfo.endDate)
+        self._startTime = Binding.constant(Bookinginfo.startTime)
+        self._endTime = Binding.constant(Bookinginfo.endTime)
+        self._selectedPets = Binding.constant(Bookinginfo.selectedPets)
+        self._selectedService = Binding.constant(Bookinginfo.selectedService)
+    }
 
         // Initializing with bindings
     init(results: Pal, startDate: Binding<Date>, endDate: Binding<Date>, startTime: Binding<Date>, endTime: Binding<Date>, selectedPets: Binding<Set<String>>, selectedService: Binding<String>) {

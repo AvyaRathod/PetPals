@@ -25,7 +25,7 @@ struct BookingPlacard: View {
                     .overlay(
                         VStack {
                             HStack {
-                                Image(results.profileImage)
+                                Image(results.profileImage!)
                                     .resizable()
                                     .scaledToFill()
                                     .frame(width: 112, height: 144)

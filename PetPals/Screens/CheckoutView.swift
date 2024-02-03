@@ -25,6 +25,7 @@ struct CheckoutView: View {
     var otherPaymentOpt = ["asdf@okhdfcbank", "omvin@aubank"]
     
     @EnvironmentObject var userBooking: BookingManager
+    
 
     var body: some View {
         VStack{
@@ -213,9 +214,7 @@ struct PaymentMethodView: View {
             if selectedPaymentMethod == methodName {
                 Button(action: {
                     if methodName == "Pay on Delivery (Cash/UPI)" {
-                        bookingManager.addBooking(serviceProviderID: results.id,
-                                                  serviceProviderName: results.name,
-                                                  serviceProviderAddr: results.address,
+                        bookingManager.addBooking(palBooked:results,
                                                   bookingCost: "to be updated",
                                                   startDate: startDate,
                                                   endDate: endDate,
@@ -226,9 +225,7 @@ struct PaymentMethodView: View {
                                                   status: .confirmed,
                                                   paymentStatus: .payOnDelivery)
                     } else {
-                        bookingManager.addBooking(serviceProviderID: results.id,
-                                                  serviceProviderName: results.name,
-                                                  serviceProviderAddr: results.address,
+                        bookingManager.addBooking(palBooked:results,
                                                   bookingCost: "to be updated",
                                                   startDate: startDate,
                                                   endDate: endDate,

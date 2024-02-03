@@ -11,7 +11,7 @@ struct PalView: View {
     var palName: String
     var palPets: String
     var imageName: String
-    @State private var isFavorite: Bool = false
+    @State private var isFavorite: Bool = true
     
     var body: some View {
 //        NavigationLink(destination: PalProfileView(palName: palName)) {

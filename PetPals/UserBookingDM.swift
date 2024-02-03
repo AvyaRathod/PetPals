@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import MapKit
 
 enum BookingStatus{
-    case confirmed, started, compvared, canceled
+    case confirmed, started, completed, canceled
 }
 
 enum PaymentStatus{
@@ -17,9 +18,7 @@ enum PaymentStatus{
 
 struct Booking: Identifiable {
     let id = UUID()
-    var serviceProviderID: UUID
-    var serviceProviderName: String
-    var serviceProviderAddr: String
+    var palBooked: Pal
     var bookingCost: String
     var startDate: Date
     var endDate: Date
@@ -30,5 +29,4 @@ struct Booking: Identifiable {
     var status: BookingStatus
     var paymentStatus: PaymentStatus
 }
-
 
